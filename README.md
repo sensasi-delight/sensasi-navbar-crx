@@ -1,29 +1,8 @@
-# Chrome Extension TypeScript Starter
+# Sensasi Navbar
 
-![build](https://github.com/chibat/chrome-extension-typescript-starter/workflows/build/badge.svg)
+![build](https://github.com/sensasi-delight/sensasi-navbar-crx/workflows/build/badge.svg)
 
-Chrome Extension, TypeScript and Visual Studio Code
-
-## Prerequisites
-
-* [node + npm](https://nodejs.org/) (Current Version)
-
-## Option
-
-* [Visual Studio Code](https://code.visualstudio.com/)
-
-## Includes the following
-
-* TypeScript
-* Webpack
-* React
-* Jest
-* Example Code
-    * Chrome Storage
-    * Options Version 2
-    * content script
-    * count up badge number
-    * background
+Chrome extension.
 
 ## Project Structure
 
@@ -37,10 +16,6 @@ Chrome Extension, TypeScript and Visual Studio Code
 ```
 npm install
 ```
-
-## Import as Visual Studio Code project
-
-...
 
 ## Build
 

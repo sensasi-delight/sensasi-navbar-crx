@@ -8,5 +8,6 @@
             ],
             "url": "http://json.schemastore.org/chrome-manifest"
         }
-    ]
+    ],
+    "editor.tabSize": 2
 }
