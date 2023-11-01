@@ -13,13 +13,13 @@ Chrome extension.
 
 ## Setup
 
-```
+```bash
 npm install
 ```
 
 ## Build
 
-```
+```bash
 npm run build
 ```
 
@@ -27,7 +27,7 @@ npm run build
 
 ### terminal
 
-```
+```bash
 npm run watch
 ```
 
@@ -39,7 +39,12 @@ type `Ctrl + Shift + B`
 
 ## Load extension to chrome
 
-Load `dist` directory
+<!-- markdownlint-disable-next-line MD033 -->
+1. Open <a href="chrome://extensions/" target="_blank">Chrome Extensions page (`chrome://extensions/`)</a>
+2. Enable `Developer mode`
+3. Click `Load unpacked`
+4. Load `dist` directory
 
 ## Test
+
 `npx jest` or `npm run test`
