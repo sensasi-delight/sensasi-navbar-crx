@@ -1,45 +1,56 @@
 import React, { useState } from 'react'
-
+// materials
 import InputAdornment from '@mui/material/InputAdornment'
 import TextField from '@mui/material/TextField'
-
-// TODO: start addortment change to search icon when user try to search (not start with http:// or https://)
-// TODO: is posible add bookmark button
-
+// icons
 import SearchIcon from '@mui/icons-material/Search'
 import LanguageIcon from '@mui/icons-material/Language'
-import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
-import { IconButton, Stack } from '@mui/material'
+// components
+// import BookmarkButton from './BookmarkButton'
+
+const URL_REGEX = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/
 
 export default function AddressBar(): React.ReactElement {
   const [value, setValue] = useState('')
-  const isSearchInput =
-    !value.startsWith('http://') && !value.startsWith('https://')
+
+  const isUrl = URL_REGEX.test(value)
 
   return (
-    <Stack direction="row" useFlexGap style={{ gap: '.5rem' }}>
+    <form
+      onSubmit={event => {
+        event.preventDefault()
+
+        if (isUrl) {
+          location.href = value
+        } else {
+          location.href = `https://www.google.com/search?q=${value}`
+        }
+      }}>
       <TextField
         size="small"
         placeholder="Search or type a URL"
         fullWidth
         onChange={e => {
+          // TODO: add suggestion
           setValue(e.target.value)
         }}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              {isSearchInput ? <SearchIcon /> : <LanguageIcon />}
+              {isUrl ? <LanguageIcon /> : <SearchIcon />}
             </InputAdornment>
           ),
+          // TODO: add bookmark button (WIP)
+          // endAdornment: (
+          //   <InputAdornment position="end">
+          //     <BookmarkButton />
+          //   </InputAdornment>
+          // ),
           style: {
-            colorScheme: 'inherit',
             borderRadius: '2rem',
           },
         }}
       />
-      <IconButton aria-label="delete">
-        <BookmarkBorderIcon />
-      </IconButton>
-    </Stack>
+    </form>
   )
 }
