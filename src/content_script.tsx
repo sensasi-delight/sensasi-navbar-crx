@@ -1,6 +1,6 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
-import AddressBar from './components/AddressBar'
+import Navbar from './components/Navbar'
 
 chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
   // if (msg.color) {
@@ -12,21 +12,13 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
   // }
 })
 
-function Navbar (): JSX.Element {
-  return (
-    <>
-      <AddressBar />
-    </>
-  )
-}
-
 const rootEl = document.createElement('div')
 rootEl.id = 'sensasi-navbar-root'
-document.body.appendChild(rootEl)
+document.body.prepend(rootEl)
 const root = createRoot(rootEl)
 
 root.render(
   <React.StrictMode>
     <Navbar />
-  </React.StrictMode>
+  </React.StrictMode>,
 )
