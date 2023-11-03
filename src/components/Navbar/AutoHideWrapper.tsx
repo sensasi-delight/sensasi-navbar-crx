@@ -31,7 +31,7 @@ function NavbarAutoHideWrapper({
     <Dialog
       fullWidth
       keepMounted
-      maxWidth={false}
+      maxWidth="sm"
       sx={{
         '& .MuiDialog-container': {
           alignItems: 'flex-start',
@@ -40,7 +40,7 @@ function NavbarAutoHideWrapper({
       PaperProps={{
         sx: {
           m: 2,
-          p: 1,
+          p: '1rem',
         },
       }}
       open={isShow}

@@ -3,6 +3,7 @@ import type { ReactElement, ReactNode } from 'react'
 // vendors
 import React from 'react'
 // materials
+import Container from '@mui/material/Container'
 import Paper from '@mui/material/Paper'
 // components
 import AddressBar from './Navbar/AddressBar'
@@ -24,9 +25,10 @@ function NavbarWrapper({ children }: { children: ReactNode }): ReactElement {
     <Paper
       style={{
         padding: '1rem',
+        boxShadow: 'none',
       }}
-      elevation={0}>
-      {children}
+      square={true}>
+      <Container maxWidth="sm">{children}</Container>
     </Paper>
   )
 }
