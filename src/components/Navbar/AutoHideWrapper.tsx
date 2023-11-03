@@ -33,6 +33,7 @@ function NavbarAutoHideWrapper({
       keepMounted
       maxWidth="sm"
       sx={{
+        minWidth: '20em',
         '& .MuiDialog-container': {
           alignItems: 'flex-start',
         },

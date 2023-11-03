@@ -26,6 +26,7 @@ function NavbarWrapper({ children }: { children: ReactNode }): ReactElement {
       style={{
         padding: '1rem',
         boxShadow: 'none',
+        minWidth: '20em',
       }}
       square={true}>
       <Container maxWidth="sm">{children}</Container>
@@ -41,6 +42,9 @@ export default function Navbar(): ReactElement {
       <div
         style={{
           display: 'flex',
+          gap: '.5em',
+          alignItems: 'center',
+          whiteSpace: 'nowrap',
         }}>
         <NavButtons />
         <AddressBar />

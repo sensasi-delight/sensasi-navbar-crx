@@ -1,12 +1,26 @@
+// types
+import type { ReactElement } from 'react'
+// vendors
 import React from 'react'
+import IconButton from '@mui/material/IconButton'
+// icons
+import RefreshIcon from '@mui/icons-material/Refresh'
+// components
+import NavButton from './NavButton'
 
-export default function NavButtons(): React.ReactElement {
+export default function NavButtons(): ReactElement {
   return (
-    <div
-      style={{
-        border: '1px solid black',
-      }}>
-      nav buttons
+    <div>
+      <NavButton variant="back" />
+      <NavButton variant="forward" />
+
+      <IconButton
+        size="small"
+        onClick={() => {
+          location.reload()
+        }}>
+        <RefreshIcon />
+      </IconButton>
     </div>
   )
 }
