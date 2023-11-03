@@ -1,14 +1,39 @@
+// types
+import type { ReactElement, ReactNode } from 'react'
+// vendors
 import React from 'react'
-
+// materials
+import Paper from '@mui/material/Paper'
 // components
 import AddressBar from './Navbar/AddressBar'
 import NavButtons from './Navbar/NavButtons'
 import TabsBar from './Navbar/TabsBar'
+// etc
+import { useAppContext } from '../hooks/AppProvider'
+import NavbarAutoHideWrapper from './Navbar/AutoHideWrapper'
 
-export default function Navbar(): React.ReactElement {
-  // TODO: Show navbar only when user hover the top of the screen (y = 0)
+function NavbarWrapper({ children }: { children: ReactNode }): ReactElement {
+  const { settings } = useAppContext()
+  const { isAutoHide } = settings
+
+  if (isAutoHide) {
+    return <NavbarAutoHideWrapper>{children}</NavbarAutoHideWrapper>
+  }
+
   return (
-    <div>
+    <Paper
+      style={{
+        padding: '1rem',
+      }}
+      elevation={0}>
+      {children}
+    </Paper>
+  )
+}
+
+export default function Navbar(): ReactElement {
+  return (
+    <NavbarWrapper>
       <TabsBar />
 
       <div
@@ -18,6 +43,6 @@ export default function Navbar(): React.ReactElement {
         <NavButtons />
         <AddressBar />
       </div>
-    </div>
+    </NavbarWrapper>
   )
 }
