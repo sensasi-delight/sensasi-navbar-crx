@@ -4,7 +4,6 @@ import type { ReactElement } from 'react'
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 // materials
-import CssBaseline from '@mui/material/CssBaseline'
 import { ThemeProvider } from '@mui/material/styles'
 // etc
 import AppProvider, { useAppContext } from './hooks/AppProvider'
@@ -16,7 +15,6 @@ function Main(): ReactElement {
 
   return (
     <ThemeProvider theme={getTheme(settings.theme)}>
-      <CssBaseline />
       <Navbar />
     </ThemeProvider>
   )
