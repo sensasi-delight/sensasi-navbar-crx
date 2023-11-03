@@ -1,24 +1,35 @@
+// types
+import type { ReactElement } from 'react'
+// vendors
 import React from 'react'
 import { createRoot } from 'react-dom/client'
+// materials
+import CssBaseline from '@mui/material/CssBaseline'
+import { ThemeProvider } from '@mui/material/styles'
+// etc
+import AppProvider, { useAppContext } from './hooks/AppProvider'
+import getTheme from './utils/getTheme'
 import Navbar from './components/Navbar'
 
-chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
-  // if (msg.color) {
-  //   console.log('Receive color = ' + msg.color)
-  //   document.body.style.backgroundColor = msg.color
-  //   sendResponse('Change color to ' + msg.color)
-  // } else {
-  //   sendResponse('Color message is none.')
-  // }
-})
+function Main(): ReactElement {
+  const { settings } = useAppContext()
+
+  return (
+    <ThemeProvider theme={getTheme(settings.theme)}>
+      <CssBaseline />
+      <Navbar />
+    </ThemeProvider>
+  )
+}
 
 const rootEl = document.createElement('div')
 rootEl.id = 'sensasi-navbar-root'
 document.body.prepend(rootEl)
-const root = createRoot(rootEl)
 
-root.render(
+createRoot(rootEl).render(
   <React.StrictMode>
-    <Navbar />
+    <AppProvider>
+      <Main />
+    </AppProvider>
   </React.StrictMode>,
 )
