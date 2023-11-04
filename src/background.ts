@@ -1,17 +1,13 @@
-interface IMessage {
-  action: string
-  query: string
-}
-
-function getHistorySuggestions(query: string, callback: any): void {
-  chrome.history.search({ text: query, maxResults: 10 }, callback)
-}
+// types
+import type ActionPayload from './types/ActionPayload'
 
 chrome.runtime.onMessage.addListener(
-  (message: IMessage, sender, sendResponse: any) => {
+  (message: ActionPayload, sender, sendResponse) => {
     if (message.action === 'getHistorySuggestions') {
-      const { query } = message
-      getHistorySuggestions(query, sendResponse)
+      chrome.history.search(
+        { text: message.data.query ?? '', maxResults: 10 },
+        sendResponse,
+      )
     }
 
     return true

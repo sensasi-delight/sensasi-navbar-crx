@@ -1,105 +1,116 @@
-import React, { useState, useEffect } from 'react'
-import type { ChangeEvent } from 'react'
+// types
+import type { HTMLAttributes, ReactElement } from 'react'
+// vendors
+import React, { useCallback, useEffect, useState } from 'react'
 import { useDebounce } from '@uidotdev/usehooks'
-
+// materials
+import Autocomplete from '@mui/material/Autocomplete'
+import Typography from '@mui/material/Typography'
+// components
+import AddressBarTextfield from './AddressBar/TextField'
 // utils
 import { convertToHttps } from '../../utils/convertToHttps'
-// materials
-import InputAdornment from '@mui/material/InputAdornment'
-import TextField from '@mui/material/TextField'
-// icons
-import SearchIcon from '@mui/icons-material/Search'
-import LanguageIcon from '@mui/icons-material/Language'
-// components
-import BookmarkButton from './BookmarkButton'
-import { Autocomplete } from '@mui/material'
+import type GetHistorySuggestionPayload from '../../types/ActionPayload/GetHistorySuggestions'
+import isHrefable from '../../utils/isHrefable'
 
-const URL_REGEX = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/
+type HistoryItem = chrome.history.HistoryItem
 
-interface Suggestions {
-  url: string
-  title: string
-}
-
-export default function AddressBar(): React.ReactElement {
+export default function AddressBar(): ReactElement {
   const [value, setValue] = useState('')
-  const debouncedSearchTerm = useDebounce(value, 300)
-  const [suggestions, setSuggestions] = useState<Suggestions[] | null>(null)
 
-  const isUrl = URL_REGEX.test(value)
+  const [isLoading, setIsLoading] = useState(false)
+  const [suggestions, setSuggestions] = useState<HistoryItem[]>([])
+
+  const debouncedSearchTerm = useDebounce(value, 300)
 
   useEffect(() => {
-    if (typeof debouncedSearchTerm === 'string') {
-      chrome.runtime.sendMessage(
-        { action: 'getHistorySuggestions', query: debouncedSearchTerm },
-        (historyItems: any[]) => {
-          if (typeof historyItems === 'undefined') return
-
-          const newSuggestions = historyItems.map((item: Suggestions) => {
-            return {
-              url: item.url,
-              title: item.title,
-            }
-          })
-
-          setSuggestions(newSuggestions)
-        },
-      )
-    }
+    updateSuggestions(debouncedSearchTerm)
   }, [debouncedSearchTerm])
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    const inputValue = e.target.value
-    setValue(inputValue)
-  }
+  useEffect(() => {
+    if (!isLoading) {
+      setIsLoading(true)
+    }
+  }, [value])
+
+  const updateSuggestions = useCallback((query = ''): void => {
+    chrome.runtime.sendMessage<GetHistorySuggestionPayload, HistoryItem[]>(
+      {
+        action: 'getHistorySuggestions',
+        data: {
+          query: location.href === query ? '' : query,
+        },
+      },
+      response => {
+        setSuggestions(response)
+        setIsLoading(false)
+      },
+    )
+  }, [])
 
   return (
-    <form
-      onSubmit={event => {
-        event.preventDefault()
-
-        if (isUrl) {
-          location.href = convertToHttps(value)
-        } else {
-          location.href = `https://www.google.com/search?q=${value}`
-        }
-      }}>
-      <Autocomplete
-        fullWidth
-        options={suggestions ?? []}
-        onChange={(e: any, newValue: Suggestions | null) => {
-          if (newValue?.url == null) return
-          location.href = newValue.url
-        }}
-        getOptionLabel={option => {
-          return `${option.title} - ${option.url}`
-        }}
-        renderInput={(params: any) => {
-          return (
-            <TextField
-              {...params}
-              value={value}
-              onChange={handleInputChange}
-              InputProps={{
-                ...params.InputProps,
-                startAdornment: (
-                  <InputAdornment position="start">
-                    {isUrl ? <LanguageIcon /> : <SearchIcon />}
-                  </InputAdornment>
-                ),
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <BookmarkButton />
-                  </InputAdornment>
-                ),
-                style: {
-                  borderRadius: '2rem',
-                },
-              }}
-            />
-          )
-        }}
-      />
-    </form>
+    <Autocomplete
+      fullWidth
+      freeSolo
+      disableClearable
+      size="small"
+      onChange={HANDLE_AUTOCOMPLETE_CHANGE}
+      renderOption={HANDLE_RENDER_OPTION}
+      options={suggestions}
+      openOnFocus={true}
+      defaultValue={{
+        id: '',
+        url: location.href,
+      }}
+      onInputChange={(event, newValue) => {
+        setValue(newValue)
+      }}
+      getOptionLabel={option =>
+        typeof option === 'string' ? option : (option.url as string)
+      }
+      renderInput={params => (
+        <AddressBarTextfield {...params} value={value} loading={isLoading} />
+      )}
+    />
   )
 }
+
+const HANDLE_AUTOCOMPLETE_CHANGE = (
+  _: any,
+  newValue: NonNullable<string | chrome.history.HistoryItem>,
+): void => {
+  if (typeof newValue === 'string') {
+    if (isHrefable(newValue)) {
+      location.href = convertToHttps(newValue)
+    } else {
+      location.href = `https://google.com/search?q=${newValue}`
+    }
+  } else {
+    if (newValue.url !== undefined) {
+      location.href = newValue.url
+    }
+  }
+}
+
+const HANDLE_RENDER_OPTION = (
+  props: HTMLAttributes<HTMLLIElement>,
+  option: HistoryItem,
+): ReactElement => (
+  <li
+    {...props}
+    style={{
+      whiteSpace: 'nowrap',
+    }}>
+    <div>
+      <Typography component="span" variant="body2">
+        {option.title}
+      </Typography>
+      <Typography variant="caption" component="span">
+        {' - '}
+      </Typography>
+      <Typography color="info.main" variant="caption" component="span">
+        {option.url}
+      </Typography>
+    </div>
+  </li>
+)
