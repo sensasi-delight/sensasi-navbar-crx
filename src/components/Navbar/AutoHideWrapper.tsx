@@ -26,10 +26,19 @@ function NavbarAutoHideWrapper({
       }, 50)
     }
 
+    const handleF6Press = (event: KeyboardEvent): void => {
+      if (event.key === 'F6' && !isShow) {
+        event.preventDefault()
+        setIsShow(true)
+      }
+    }
+
     window.addEventListener('mousemove', handleMouseMove)
+    window.addEventListener('keydown', handleF6Press)
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove)
+      window.removeEventListener('keydown', handleF6Press)
     }
   }, [])
 

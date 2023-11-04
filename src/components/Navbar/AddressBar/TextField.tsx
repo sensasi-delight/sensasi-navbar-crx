@@ -2,7 +2,7 @@
 import type { CSSProperties, ReactElement } from 'react'
 import type { AutocompleteRenderInputParams } from '@mui/material/Autocomplete'
 // vendors
-import React from 'react'
+import React, { useEffect } from 'react'
 // materials
 import CircularProgress from '@mui/material/CircularProgress'
 import TextField from '@mui/material/TextField'
@@ -23,6 +23,33 @@ export default function AddressBarTextfield(
   props: AutocompleteRenderInputParams & { value: string; loading: boolean },
 ): ReactElement {
   const { loading, ...rest } = props
+
+  useEffect(() => {
+    const handleF6Press = (event: KeyboardEvent): void => {
+      if (event.key === 'F6') {
+        event.preventDefault()
+
+        // TODO: remove the possibility to fired the focus event when the address bar is already focused
+        if (
+          rest.inputProps.ref !== null &&
+          'current' in rest.inputProps.ref &&
+          rest.inputProps.ref.current !== null
+        ) {
+          const inputEl = rest.inputProps.ref.current
+
+          setTimeout(() => {
+            inputEl.focus()
+          }, 200)
+        }
+      }
+    }
+
+    window.addEventListener('keydown', handleF6Press)
+
+    return () => {
+      window.removeEventListener('keydown', handleF6Press)
+    }
+  }, [])
 
   return (
     <TextField
