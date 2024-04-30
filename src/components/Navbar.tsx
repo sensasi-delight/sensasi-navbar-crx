@@ -5,6 +5,7 @@ import React from 'react'
 // materials
 import Container from '@mui/material/Container'
 import Paper from '@mui/material/Paper'
+import Stack from '@mui/material/Stack'
 // components
 import AddressBar from './Navbar/AddressBar'
 import NavButtons from './Navbar/NavButtons'
@@ -27,6 +28,7 @@ function NavbarWrapper({ children }: { children: ReactNode }): ReactElement {
         padding: '1rem',
         boxShadow: 'none',
         minWidth: '20em',
+        zIndex: 99999,
       }}
       square={true}>
       <Container maxWidth="sm">{children}</Container>
@@ -39,16 +41,10 @@ export default function Navbar(): ReactElement {
     <NavbarWrapper>
       <TabsBar />
 
-      <div
-        style={{
-          display: 'flex',
-          gap: '.5em',
-          alignItems: 'center',
-          whiteSpace: 'nowrap',
-        }}>
+      <Stack gap={1} direction="row" whiteSpace="nowrap" alignItems="center">
         <NavButtons />
         <AddressBar />
-      </div>
+      </Stack>
     </NavbarWrapper>
   )
 }
