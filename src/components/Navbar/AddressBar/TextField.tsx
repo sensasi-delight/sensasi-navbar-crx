@@ -70,6 +70,9 @@ export default function AddressBarTextfield(
             )}
           </InputAdornment>
         ),
+        onFocus: event => {
+          event.target.select()
+        },
 
         // TODO: fix bookmark button, disabled for now
         // endAdornment: (
