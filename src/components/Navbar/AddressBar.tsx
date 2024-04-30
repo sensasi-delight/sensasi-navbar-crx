@@ -50,7 +50,16 @@ export default function AddressBar(): ReactElement {
 
   return (
     <Autocomplete
-      fullWidth
+      slotProps={{
+        popper: {
+          sx: {
+            zIndex: 99999,
+          },
+        },
+      }}
+      sx={{
+        flexGrow: 1,
+      }}
       freeSolo
       disableClearable
       size="small"
