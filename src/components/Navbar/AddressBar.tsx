@@ -10,8 +10,8 @@ import Typography from '@mui/material/Typography'
 import AddressBarTextfield from './AddressBar/TextField'
 // utils
 import { convertToHttps } from '../../utils/convertToHttps'
-import type GetHistorySuggestionPayload from '../../types/ActionPayload/GetHistorySuggestions'
 import isHrefable from '../../utils/isHrefable'
+import sendToBgScript from '../../utils/sendToBgScript'
 
 type HistoryItem = chrome.history.HistoryItem
 
@@ -34,14 +34,12 @@ export default function AddressBar(): ReactElement {
   }, [value])
 
   const updateSuggestions = useCallback((query = ''): void => {
-    chrome.runtime.sendMessage<GetHistorySuggestionPayload, HistoryItem[]>(
+    sendToBgScript(
+      'getHistorySuggestions',
       {
-        action: 'getHistorySuggestions',
-        data: {
-          query: location.href === query ? '' : query,
-        },
+        text: location.href === query ? '' : query,
       },
-      response => {
+      (response: HistoryItem[]) => {
         setSuggestions(response)
         setIsLoading(false)
       },
