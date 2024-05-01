@@ -22,7 +22,7 @@ function Main(): ReactElement {
 
 const rootEl = document.createElement('div')
 rootEl.id = 'sensasi-navbar-root'
-document.body.prepend(rootEl)
+document.body.insertAdjacentElement('beforebegin', rootEl)
 
 createRoot(rootEl).render(
   <React.StrictMode>

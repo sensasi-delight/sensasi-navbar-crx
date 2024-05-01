@@ -1,14 +1,17 @@
+// types
 import type { AppContextType } from './AppContext.type'
 import type { Settings } from '../types/Settings'
 import type { ReactNode } from 'react'
-
+// vendors
 import React, { createContext, useContext, useEffect, useState } from 'react'
 
+const DEFAULT_VALUE: Settings = {
+  theme: 'dark',
+  isAutoHide: true,
+}
+
 const AppContext = createContext<AppContextType>({
-  settings: {
-    theme: 'dark',
-    isAutoHide: true,
-  },
+  settings: DEFAULT_VALUE,
   setSettings: () => {},
 })
 
@@ -17,24 +20,28 @@ export default function AppProvider({
 }: {
   children: ReactNode
 }): ReactNode {
-  const [settings, setSettingsState] = useState<Settings>({
-    theme: 'dark',
-    isAutoHide: true,
-  })
+  const [settings, setSettingsState] = useState<Settings>(DEFAULT_VALUE)
 
   useEffect(() => {
     chrome.storage.sync.get('settings', ({ settings }) => {
-      setSettingsState(settings)
-    })
-
-    chrome.storage.onChanged.addListener((changes, area) => {
-      if (area === 'sync' && changes.settings?.newValue !== undefined) {
-        setSettingsState(changes.settings.newValue)
+      if (settings !== undefined) {
+        setSettingsState(settings)
       }
     })
 
+    function handleChanges(
+      changes: Record<string, chrome.storage.StorageChange>,
+      area: 'sync' | 'local' | 'managed' | 'session',
+    ): void {
+      if (area === 'sync' && changes.settings?.newValue !== undefined) {
+        setSettingsState(changes.settings.newValue)
+      }
+    }
+
+    chrome.storage.onChanged.addListener(handleChanges)
+
     return () => {
-      chrome.storage.onChanged.removeListener(() => {})
+      chrome.storage.onChanged.removeListener(handleChanges)
     }
   }, [])
 
@@ -46,7 +53,7 @@ export default function AppProvider({
           isAutoHide: newSettings.isAutoHide,
         },
       },
-      () => 1212,
+      () => {},
     )
   }
 
