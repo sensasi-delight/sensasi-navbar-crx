@@ -13,13 +13,13 @@ import { convertToHttps } from '../../utils/convertToHttps'
 import isHrefable from '../../utils/isHrefable'
 import sendToBgScript from '../../utils/sendToBgScript'
 
-type HistoryItem = chrome.history.HistoryItem
-
 export default function AddressBar(): ReactElement {
   const [value, setValue] = useState('')
 
   const [isLoading, setIsLoading] = useState(false)
-  const [suggestions, setSuggestions] = useState<HistoryItem[]>([])
+  const [suggestions, setSuggestions] = useState<chrome.history.HistoryItem[]>(
+    [],
+  )
 
   const debouncedSearchTerm = useDebounce(value, 300)
 
@@ -39,7 +39,7 @@ export default function AddressBar(): ReactElement {
       {
         text: location.href === query ? '' : query,
       },
-      (response: HistoryItem[]) => {
+      (response: chrome.history.HistoryItem[]) => {
         setSuggestions(response)
         setIsLoading(false)
       },
@@ -57,6 +57,9 @@ export default function AddressBar(): ReactElement {
       }}
       sx={{
         flexGrow: 1,
+        '& .MuiInputBase-root': {
+          backgroundColor: 'rgba(0,0,0,0.1)',
+        },
       }}
       freeSolo
       disableClearable
@@ -101,7 +104,7 @@ const HANDLE_AUTOCOMPLETE_CHANGE = (
 
 const HANDLE_RENDER_OPTION = (
   props: HTMLAttributes<HTMLLIElement>,
-  option: HistoryItem,
+  option: chrome.history.HistoryItem,
 ): ReactElement => (
   <li
     {...props}
