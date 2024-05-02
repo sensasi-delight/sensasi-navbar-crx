@@ -3,7 +3,6 @@
 const { merge } = require('webpack-merge')
 const CopyPlugin = require('copy-webpack-plugin')
 const common = require('./webpack.common.js')
-const path = require('path')
 
 common.plugins = [
   new CopyPlugin({
@@ -13,7 +12,7 @@ common.plugins = [
         to: '../',
         context: 'public',
         transform: (content, path) => {
-          if (path.includes('manifest') === false) {
+          if (!path.includes('manifest')) {
             return content
           }
 
@@ -30,7 +29,4 @@ common.plugins = [
 module.exports = merge(common, {
   mode: 'development',
   devtool: 'inline-source-map',
-  output: {
-    path: path.join(__dirname, '../dev/js'),
-  },
 })
