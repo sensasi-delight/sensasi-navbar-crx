@@ -16,6 +16,12 @@ export default function TabsBar(): React.ReactElement {
   const [tabs, setTabs] = useState<chrome.tabs.Tab[]>([])
   const [thisTabId, setThisTabId] = useState<number>()
 
+  function getAndSetTabs(): void {
+    sendToBgScript('getTabs', undefined, (response: chrome.tabs.Tab[]) => {
+      setTabs(response)
+    })
+  }
+
   useEffect(() => {
     sendToBgScript(
       'getSelfInfo',
@@ -24,21 +30,11 @@ export default function TabsBar(): React.ReactElement {
         setThisTabId(response.tab?.id)
       },
     )
-
-    function getAndSetTabs(): void {
-      sendToBgScript('getTabs', undefined, (response: chrome.tabs.Tab[]) => {
-        setTabs(response)
-      })
-    }
-
-    getAndSetTabs()
-
-    document.addEventListener('visibilitychange', getAndSetTabs)
-
-    return () => {
-      document.removeEventListener('visibilitychange', getAndSetTabs)
-    }
   }, [])
+
+  useEffect(() => {
+    getAndSetTabs()
+  })
 
   return (
     <Stack
