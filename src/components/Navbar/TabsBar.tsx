@@ -109,6 +109,8 @@ export default function TabsBar(): React.ReactElement {
 const TABS_ROOT_SX = {
   overflowX: 'auto',
 
+  scrollbarColor: 'initial',
+
   '::-webkit-scrollbar': {
     width: '5px',
     height: '5px',

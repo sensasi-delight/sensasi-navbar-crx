@@ -1,14 +1,38 @@
-import type { Theme } from '@mui/material/styles'
+import type { Theme, ThemeOptions } from '@mui/material/styles'
 import { createTheme } from '@mui/material/styles'
 
-const DARK_THEME = createTheme({
-  palette: {
-    mode: 'dark',
-  },
-})
+export default function getTheme(
+  theme: 'dark' | 'light',
+  shadowRootElement?: HTMLDivElement,
+): Theme {
+  const opts: ThemeOptions = {
+    palette:
+      theme === 'dark'
+        ? {
+            mode: 'dark',
+          }
+        : undefined,
+  }
 
-const LIGHT_THEME = createTheme({})
+  if (shadowRootElement !== undefined) {
+    opts.components = {
+      MuiPopover: {
+        defaultProps: {
+          container: shadowRootElement,
+        },
+      },
+      MuiPopper: {
+        defaultProps: {
+          container: shadowRootElement,
+        },
+      },
+      MuiModal: {
+        defaultProps: {
+          container: shadowRootElement,
+        },
+      },
+    }
+  }
 
-export default function getTheme(theme: 'dark' | 'light'): Theme {
-  return theme === 'dark' ? DARK_THEME : LIGHT_THEME
+  return createTheme(opts)
 }
