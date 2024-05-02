@@ -11,9 +11,6 @@ Sensasi Navbar is a Chrome extension designed to enhance navigation within the b
 >   - [Directory Structure](#directory-structure)
 >   - [Setup](#setup)
 >   - [Build](#build)
->   - [Build in Watch Mode](#build-in-watch-mode)
->     - [Terminal](#terminal)
->     - [Visual Studio Code](#visual-studio-code)
 >   - [Load Extension to Chrome](#load-extension-to-chrome)
 >   - [Test](#test)
 > - [Contributing](#contributing)
@@ -42,22 +39,12 @@ npm install
 ### Build
 
 ```bash
+# production build
 npm run build
+
+# development build
+npm run dev
 ```
-
-### Build in Watch Mode
-
-#### terminal
-
-```bash
-npm run watch
-```
-
-#### Visual Studio Code
-
-Run watch mode.
-
-type `Ctrl + Shift + B`
 
 ### Load Extension to Chrome
 
