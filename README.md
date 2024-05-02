@@ -4,6 +4,10 @@
 
 Sensasi Navbar is a Chrome extension designed to enhance navigation within the browser, particularly when Chrome is in full-screen mode (F11). It provides a navigation bar that assists in navigating through tabs, offering convenience and ease of use.
 
+> **Preview:**
+> 
+> ![2024-05-0304-40-04-ezgif com-optimize](https://github.com/sensasi-delight/sensasi-navbar-crx/assets/19289785/ee0ebe90-5f53-449b-8bb4-6c3aaba1c4d0)
+
 > **Contents:**
 >
 > - [Installation](#installation)
