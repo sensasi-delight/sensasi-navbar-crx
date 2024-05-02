@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Sensasi Navbar",
-  "description": "Sensasi Navbar",
-  "version": "0.1",
+  "description": "HANDLED BY WEBPACK",
+  "version": "HANDLED BY WEBPACK",
   "options_ui": {
     "page": "options.html"
   },
