@@ -10,9 +10,7 @@ if (rootEl === null) {
   throw new Error('root element not found')
 }
 
-const root = createRoot(rootEl)
-
-root.render(
+createRoot(rootEl).render(
   <React.StrictMode>
     <AppProvider>
       <OptionsPage />

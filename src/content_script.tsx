@@ -1,20 +1,24 @@
 // types
 import type { ReactElement } from 'react'
 // vendors
-import React from 'react'
 import { createRoot } from 'react-dom/client'
+import { CacheProvider } from '@emotion/react'
+import createCache from '@emotion/cache'
+import React from 'react'
 // materials
 import { ThemeProvider } from '@mui/material/styles'
-// etc
-import AppProvider, { useAppContext } from './hooks/AppProvider'
-import getTheme from './utils/getTheme'
+// component
 import Navbar from './components/Navbar'
+// hooks
+import AppProvider, { useAppContext } from './hooks/AppProvider'
+// utils
+import getTheme from './utils/getTheme'
 
 function Main(): ReactElement {
   const { settings } = useAppContext()
 
   return (
-    <ThemeProvider theme={getTheme(settings.theme)}>
+    <ThemeProvider theme={getTheme(settings.theme, shadowRootElement)}>
       <Navbar />
     </ThemeProvider>
   )
@@ -24,10 +28,21 @@ const rootEl = document.createElement('div')
 rootEl.id = 'sensasi-navbar-root'
 document.body.insertAdjacentElement('beforebegin', rootEl)
 
-createRoot(rootEl).render(
+const shadowContainer = rootEl.attachShadow({ mode: 'open' })
+const shadowRootElement = document.createElement('div')
+shadowContainer.appendChild(shadowRootElement)
+
+createRoot(shadowRootElement).render(
   <React.StrictMode>
     <AppProvider>
-      <Main />
+      <CacheProvider
+        value={createCache({
+          key: 'sensasi-navbar-css',
+          prepend: true,
+          container: shadowContainer,
+        })}>
+        <Main />
+      </CacheProvider>
     </AppProvider>
   </React.StrictMode>,
 )
