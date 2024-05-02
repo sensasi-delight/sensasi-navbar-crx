@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+
 const path = require('path')
 const CopyPlugin = require('copy-webpack-plugin')
 const SRC_DIR = path.join(__dirname, '..', 'src')
@@ -35,7 +37,6 @@ module.exports = {
   plugins: [
     new CopyPlugin({
       patterns: [{ from: '.', to: '../', context: 'public' }],
-      options: {},
     }),
   ],
 }
