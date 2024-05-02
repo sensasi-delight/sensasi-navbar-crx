@@ -7,11 +7,11 @@ import { useDebounce } from '@uidotdev/usehooks'
 import Autocomplete from '@mui/material/Autocomplete'
 import Typography from '@mui/material/Typography'
 // components
-import AddressBarTextfield from './AddressBar/TextField'
+import AddressBarTextfield from './TextField'
 // utils
-import { convertToHttps } from '../../utils/convertToHttps'
-import isHrefable from '../../utils/isHrefable'
-import sendToBgScript from '../../utils/sendToBgScript'
+import { convertToHttps } from '../../../utils/convertToHttps'
+import isHrefable from '../../../utils/isHrefable'
+import sendToBgScript from '../../../utils/sendToBgScript'
 
 export default function AddressBar(): ReactElement {
   const [value, setValue] = useState('')
