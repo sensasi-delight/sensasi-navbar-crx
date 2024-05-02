@@ -37,7 +37,31 @@ module.exports = {
   },
   plugins: [
     new CopyPlugin({
-      patterns: [{ from: '.', to: '../', context: 'public' }],
+      patterns: [
+        {
+          from: '.',
+          to: '../',
+          context: 'public',
+          transform: (content, path) => {
+            if (!path.includes('manifest')) {
+              return content
+            }
+
+            const manifest = JSON.parse(content.toString())
+            const packageJson = require('../package.json')
+
+            if (this.mode === 'development') {
+              manifest.name += ' (dev)'
+            }
+
+            manifest.version = packageJson.version
+            manifest.description = packageJson.description
+
+            manifest_JSON = JSON.stringify(manifest, null, 2)
+            return manifest_JSON
+          },
+        },
+      ],
     }),
   ],
 }
