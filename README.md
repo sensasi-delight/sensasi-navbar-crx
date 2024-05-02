@@ -23,8 +23,8 @@ Sensasi Navbar is a Chrome extension designed to enhance navigation within the b
 
 Sensasi Navbar is not yet available on the Chrome Web Store. To install the extension, follow the steps below:
 
-1. Download the latest release from the [releases page](releases) and extract the `dist` directory from the `.zip` file.
-2. Open [Chrome Extensions page (`chrome://extensions/`)](chrome://extensions/).
+1. Download the latest release from the [releases page](https://github.com/sensasi-delight/sensasi-navbar-crx/releases) and extract the `dist` directory from the `.zip` file.
+2. Open Chrome Extensions page: [chrome://extensions/](chrome://extensions/).
 3. Enable `Developer mode`.
 4. Click `Load unpacked`.
 5. Choose the `dist` directory from step 1.
@@ -57,10 +57,10 @@ npm run dev
 ### Load Extension to Chrome
 
 <!-- markdownlint-disable-next-line MD033 -->
-1. Open <a href="chrome://extensions/" target="_blank">Chrome Extensions page (`chrome://extensions/`)</a>
-2. Enable `Developer mode`
-3. Click `Load unpacked`
-4. Load `.build` directory
+1. Open Chrome Extensions page: [chrome://extensions/](chrome://extensions/).
+2. Enable `Developer mode`.
+3. Click `Load unpacked`.
+4. Load the `.build` directory.
 
 ### Test
 
@@ -68,7 +68,7 @@ npm run dev
 
 ## Contributing
 
-Contributions are welcome! Feel free to [fork the repository](fork), make your changes, and submit a pull request. Any suggestions, bug reports, or feature requests can also be submitted through the GitHub [issues page](issues).
+Contributions are welcome! Feel free to [fork the repository](https://github.com/sensasi-delight/sensasi-navbar-crx/fork), make your changes, and submit a pull request. Any suggestions, bug reports, or feature requests can also be submitted through the GitHub [issues page](https://github.com/sensasi-delight/sensasi-navbar-crx/issues).
 
 ## License
 
