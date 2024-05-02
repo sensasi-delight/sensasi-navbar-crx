@@ -5,9 +5,9 @@ import React from 'react'
 import CssBaseline from '@mui/material/CssBaseline'
 import { ThemeProvider } from '@mui/material/styles'
 
-import OptionsForm from './OptionsPage/Form'
-import { useAppContext } from '../hooks/AppProvider'
-import getTheme from '../utils/getTheme'
+import OptionsForm from './Form'
+import { useAppContext } from '../../hooks/AppProvider'
+import getTheme from '../../utils/getTheme'
 
 const mainContent = (
   <>
