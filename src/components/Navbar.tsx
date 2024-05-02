@@ -9,6 +9,7 @@ import Stack from '@mui/material/Stack'
 // components
 import AddressBar from './Navbar/AddressBar'
 import NavButtons from './Navbar/NavButtons'
+import OptionsMenu from './Navbar/OptionsMenu'
 import TabsBar from './Navbar/TabsBar'
 // etc
 import { useAppContext } from '../hooks/AppProvider'
@@ -41,9 +42,10 @@ export default function Navbar(): ReactElement {
     <NavbarWrapper>
       <TabsBar />
 
-      <Stack gap={1} direction="row" whiteSpace="nowrap" alignItems="center">
+      <Stack direction="row" whiteSpace="nowrap" alignItems="center">
         <NavButtons />
         <AddressBar />
+        <OptionsMenu />
       </Stack>
     </NavbarWrapper>
   )

@@ -10,7 +10,10 @@ import NavButton from './NavButton'
 
 export default function NavButtons(): ReactElement {
   return (
-    <div>
+    <div
+      style={{
+        marginRight: '1em',
+      }}>
       <NavButton variant="back" />
       <NavButton variant="forward" />
 

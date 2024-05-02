@@ -89,7 +89,7 @@ export default function AddressBarTextfield(
         inputProps: {
           ...rest.inputProps,
           style: {
-            padding: '.2em 0',
+            padding: 0,
             fontSize: '.85em',
           },
         },
