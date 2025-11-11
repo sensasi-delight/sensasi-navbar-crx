@@ -37,4 +37,4 @@ function initializeApp(): void {
   )
 }
 
-// initializeApp()
+initializeApp()
