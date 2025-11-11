@@ -7,7 +7,12 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "ignore": ["node_modules", ".build", "dist", "webpack"]
+    "ignore": [
+      "node_modules",
+      ".build",
+      "dist",
+      "webpack"
+    ]
   },
   "formatter": {
     "enabled": true,
@@ -23,7 +28,16 @@
     "rules": {
       "recommended": true,
       "style": {
-        "noNonNullAssertion": "off"
+        "noNonNullAssertion": "off",
+        "noRestrictedImports": {
+          "level": "error",
+          "options": {
+            "paths": {
+              "@mui/icons-material": "No Barrel Import. Use `import [Icon] from '@mui/icons-material/[Icon]'` instead.",
+              "@mui/material": "No Barrel Import. Use `import [Component] from '@mui/material/[Component]'` instead."
+            }
+          }
+        }
       },
       "suspicious": {
         "noExplicitAny": "warn"
