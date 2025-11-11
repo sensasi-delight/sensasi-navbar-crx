@@ -3,6 +3,8 @@
 ## Project Overview
 Chrome extension that provides a navigation bar for fullscreen browsing (F11 mode). Built with React + TypeScript + Material-UI, uses Shadow DOM for isolation, and communicates via Chrome extension APIs.
 
+**Package Manager**: This project uses [Bun](https://bun.sh) instead of npm/yarn. All commands should use `bun` instead of `npm`.
+
 ## Architecture
 
 ### Extension Entry Points (Webpack bundles)
@@ -41,18 +43,40 @@ Navbar renders in Shadow DOM (`content_script.tsx:25-30`) for CSS isolation:
 
 ### Build Commands
 ```bash
-npm run dev    # Watch mode, builds to .build/, appends "(dev)" to extension name
-npm run build  # Production build, strips "(dev)"
-npm run test   # Jest with ts-jest
-npm run style  # Prettier format
+bun run dev     # Watch mode, builds to .build/, appends "(dev)" to extension name
+bun run build   # Production build, strips "(dev)"
+bun run test    # Jest with ts-jest via Bun
+bun run check   # Biome check (format + lint) with auto-fix
+bun run format  # Biome format only
+bun run lint    # Biome lint only
+```
+
+**Important**: Use `bun` commands, not `npm`. Bun is significantly faster for install and script execution.
+
+### Package Management
+```bash
+bun install           # Install dependencies
+bun add <package>     # Add dependency
+bun add -d <package>  # Add dev dependency
+bun remove <package>  # Remove dependency
+bun outdated          # Check for outdated packages
 ```
 
 ### Loading Extension
-1. `npm run dev` → generates `.build/` directory
+1. `bun run dev` → generates `.build/` directory
 2. Chrome Extensions → Developer mode → Load unpacked → select `.build/`
 3. Changes auto-rebuild, manually reload extension in Chrome
 
 **Note**: Build output is `.build/` NOT `dist/` (README mentions dist for releases only)
+
+## Code Quality
+
+### Biome (Formatter & Linter)
+- Uses [Biome](https://biomejs.dev) for formatting and linting (replaces ESLint + Prettier)
+- Config in `biome.json` with recommended rules
+- Single quotes, semicolons as needed, trailing commas
+- Run `bun run check` to format and lint with auto-fix
+- Separate commands: `bun run format` (format only), `bun run lint` (lint only)
 
 ## Code Conventions
 
@@ -95,8 +119,9 @@ Manifest v3 requires:
 - `"host_permissions": ["<all_urls>"]` for content script injection
 
 ## Testing
-- Jest configured with `ts-jest` transform
+- Jest configured with `ts-jest` transform, run via Bun
 - Test files in `src/__tests__/`
+- Run tests with `bun run test` or `bun test`
 - No E2E tests currently - consider Puppeteer for extension testing
 
 ## Common Pitfalls
