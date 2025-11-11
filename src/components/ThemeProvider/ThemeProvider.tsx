@@ -1,12 +1,9 @@
-import React from 'react'
-import {
-  ThemeProvider as MuiThemeProvider,
-} from '@mui/material/styles'
+import { ThemeProvider as MuiThemeProvider } from '@mui/material/styles'
+import type { ThemeProviderProps } from '@mui/material/styles/ThemeProvider'
 // hooks
 import { useAppContext } from '../../hooks/AppProvider'
 // utils
 import getTheme from '../../utils/getTheme'
-import type { ThemeProviderProps } from '@mui/material/styles/ThemeProvider'
 
 export default function ThemeProvider({
   children,

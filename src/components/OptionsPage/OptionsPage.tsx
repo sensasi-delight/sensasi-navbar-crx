@@ -1,13 +1,9 @@
-import type { ReactNode } from 'react'
-
-import React from 'react'
-
 import CssBaseline from '@mui/material/CssBaseline'
 import { ThemeProvider } from '@mui/material/styles'
-
-import OptionsForm from './Form'
+import type { ReactNode } from 'react'
 import { useAppContext } from '../../hooks/AppProvider'
 import getTheme from '../../utils/getTheme'
+import OptionsForm from './Form'
 
 const mainContent = (
   <>

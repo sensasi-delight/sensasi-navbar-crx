@@ -1,5 +1,8 @@
 // vendors
-import React from 'react'
+
+// icons
+import MoreVertIcon from '@mui/icons-material/MoreVert'
+import OpenInNewIcon from '@mui/icons-material/OpenInNew'
 // materials
 import Divider from '@mui/material/Divider'
 import IconButton from '@mui/material/IconButton'
@@ -7,9 +10,7 @@ import ListItemText from '@mui/material/ListItemText'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import Switch from '@mui/material/Switch'
-// icons
-import MoreVertIcon from '@mui/icons-material/MoreVert'
-import OpenInNewIcon from '@mui/icons-material/OpenInNew'
+import React from 'react'
 // hooks
 import { useAppContext } from '../../../hooks/AppProvider'
 

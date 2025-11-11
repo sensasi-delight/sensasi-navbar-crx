@@ -1,10 +1,9 @@
 // types
-import type { ReactElement } from 'react'
-// vendors
-import React from 'react'
-import IconButton from '@mui/material/IconButton'
+
 // icons
 import RefreshIcon from '@mui/icons-material/Refresh'
+import IconButton from '@mui/material/IconButton'
+import type { ReactElement } from 'react'
 // components
 import NavButton from './NavButton'
 

@@ -1,17 +1,12 @@
-// types
-import type { HTMLAttributes, ReactElement } from 'react'
-// vendors
-import React, { useCallback, useEffect, useState } from 'react'
-import { useDebounce } from '@uidotdev/usehooks'
-// materials
 import Autocomplete from '@mui/material/Autocomplete'
 import Typography from '@mui/material/Typography'
-// components
-import AddressBarTextfield from './TextField'
-// utils
+import { useDebounce } from '@uidotdev/usehooks'
+import type { HTMLAttributes, ReactElement } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { convertToHttps } from '../../../utils/convertToHttps'
 import isHrefable from '../../../utils/isHrefable'
 import sendToBgScript from '../../../utils/sendToBgScript'
+import AddressBarTextfield from './TextField'
 
 export default function AddressBar(): ReactElement {
   const [value, setValue] = useState('')
@@ -20,18 +15,6 @@ export default function AddressBar(): ReactElement {
   const [suggestions, setSuggestions] = useState<chrome.history.HistoryItem[]>(
     [],
   )
-
-  const debouncedSearchTerm = useDebounce(value, 300)
-
-  useEffect(() => {
-    updateSuggestions(debouncedSearchTerm)
-  }, [debouncedSearchTerm])
-
-  useEffect(() => {
-    if (!isLoading) {
-      setIsLoading(true)
-    }
-  }, [value])
 
   const updateSuggestions = useCallback((query = ''): void => {
     sendToBgScript(
@@ -45,6 +28,18 @@ export default function AddressBar(): ReactElement {
       },
     )
   }, [])
+
+  const debouncedSearchTerm = useDebounce(value, 300)
+
+  useEffect(() => {
+    updateSuggestions(debouncedSearchTerm)
+  }, [debouncedSearchTerm, updateSuggestions])
+
+  useEffect(() => {
+    if (!isLoading) {
+      setIsLoading(true)
+    }
+  }, [isLoading])
 
   return (
     <Autocomplete
@@ -72,7 +67,7 @@ export default function AddressBar(): ReactElement {
         id: '',
         url: location.href,
       }}
-      onInputChange={(event, newValue) => {
+      onInputChange={(_event, newValue) => {
         setValue(newValue)
       }}
       getOptionLabel={option =>
@@ -86,7 +81,7 @@ export default function AddressBar(): ReactElement {
 }
 
 const HANDLE_AUTOCOMPLETE_CHANGE = (
-  _: any,
+  _: unknown,
   newValue: NonNullable<string | chrome.history.HistoryItem>,
 ): void => {
   if (typeof newValue === 'string') {

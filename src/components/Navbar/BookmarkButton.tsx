@@ -1,9 +1,7 @@
-import React from 'react'
-
-import IconButton from '@mui/material/IconButton'
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
+import IconButton from '@mui/material/IconButton'
 
-export default function BookmarkButton(): React.ReactElement {
+export default function BookmarkButton() {
   return (
     <IconButton
       size="small"

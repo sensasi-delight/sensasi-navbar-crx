@@ -1,10 +1,11 @@
 // types
-import type { ReactElement, ReactNode } from 'react'
-// vendors
-import React, { useEffect, useState, memo } from 'react'
+
 // materials
 import Dialog from '@mui/material/Dialog'
 import Grow from '@mui/material/Grow'
+import type { ReactElement, ReactNode } from 'react'
+// vendors
+import { memo, useEffect, useState } from 'react'
 
 let timeout: NodeJS.Timeout
 
@@ -40,7 +41,7 @@ function NavbarAutoHideWrapper({
       window.removeEventListener('mousemove', handleMouseMove)
       window.removeEventListener('keydown', handleF6Press)
     }
-  }, [])
+  }, [isShow])
 
   return (
     <Dialog

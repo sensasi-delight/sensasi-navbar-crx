@@ -1,15 +1,16 @@
 // types
-import type { CSSProperties, ReactElement } from 'react'
-import type { AutocompleteRenderInputParams } from '@mui/material/Autocomplete'
-// vendors
-import React, { useEffect } from 'react'
-// materials
-import CircularProgress from '@mui/material/CircularProgress'
-import TextField from '@mui/material/TextField'
-import InputAdornment from '@mui/material/InputAdornment'
+
 // icons
 import GoogleIcon from '@mui/icons-material/Google'
 import LanguageIcon from '@mui/icons-material/Language'
+import type { AutocompleteRenderInputParams } from '@mui/material/Autocomplete'
+// materials
+import CircularProgress from '@mui/material/CircularProgress'
+import InputAdornment from '@mui/material/InputAdornment'
+import TextField from '@mui/material/TextField'
+import type { CSSProperties, ReactElement } from 'react'
+// vendors
+import { useEffect } from 'react'
 // components
 // import BookmarkButton from './BookmarkButton'
 // utils
@@ -49,7 +50,7 @@ export default function AddressBarTextfield(
     return () => {
       window.removeEventListener('keydown', handleF6Press)
     }
-  }, [])
+  }, [rest.inputProps.ref])
 
   return (
     <TextField

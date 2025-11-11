@@ -1,8 +1,9 @@
 // vendors
-import { createRoot } from 'react-dom/client'
-import { CacheProvider } from '@emotion/react'
+
 import createCache from '@emotion/cache'
+import { CacheProvider } from '@emotion/react'
 import React from 'react'
+import { createRoot } from 'react-dom/client'
 // component
 import Navbar from './components/Navbar'
 import ThemeProvider from './components/ThemeProvider'

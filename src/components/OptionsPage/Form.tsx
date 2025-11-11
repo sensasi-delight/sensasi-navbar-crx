@@ -1,10 +1,11 @@
 // vendors
-import React from 'react'
+
 // materials
 import FormControlLabel from '@mui/material/FormControlLabel'
 import FormGroup from '@mui/material/FormGroup'
 import FormHelperText from '@mui/material/FormHelperText'
 import Switch from '@mui/material/Switch'
+import type React from 'react'
 // etc
 import { useAppContext } from '../../hooks/AppProvider'
 

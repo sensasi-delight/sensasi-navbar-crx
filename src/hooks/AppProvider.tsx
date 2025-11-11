@@ -1,9 +1,10 @@
 // types
-import type { AppContextType } from './AppContext.type'
-import type { Settings } from '../types/Settings'
+
 import type { ReactNode } from 'react'
 // vendors
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
+import type { Settings } from '../types/Settings'
+import type { AppContextType } from './AppContext.type'
 
 const DEFAULT_VALUE: Settings = {
   theme: 'dark',
