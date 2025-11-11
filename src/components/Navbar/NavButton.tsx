@@ -1,11 +1,10 @@
 // types
-import type { ReactElement } from 'react'
-// vendors
-import React from 'react'
-import IconButton from '@mui/material/IconButton'
+
 // icons
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
+import IconButton from '@mui/material/IconButton'
+import type { ReactElement } from 'react'
 
 export default function NavButton({
   variant,

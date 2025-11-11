@@ -1,19 +1,18 @@
 // types
-import type { ReactElement, ReactNode } from 'react'
-// vendors
-import React from 'react'
+
 // materials
 import Container from '@mui/material/Container'
 import Paper from '@mui/material/Paper'
 import Stack from '@mui/material/Stack'
+import type { ReactElement, ReactNode } from 'react'
+// etc
+import { useAppContext } from '../../hooks/AppProvider'
 // components
 import AddressBar from './AddressBar'
+import NavbarAutoHideWrapper from './AutoHideWrapper'
 import NavButtons from './NavButtons'
 import OptionsMenu from './OptionsMenu'
 import TabsBar from './TabsBar'
-// etc
-import { useAppContext } from '../../hooks/AppProvider'
-import NavbarAutoHideWrapper from './AutoHideWrapper'
 
 function NavbarWrapper({ children }: { children: ReactNode }): ReactElement {
   const { settings } = useAppContext()

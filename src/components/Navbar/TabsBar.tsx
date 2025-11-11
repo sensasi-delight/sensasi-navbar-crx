@@ -1,14 +1,16 @@
 // vendors
-import React, { useEffect, useState } from 'react'
+
+import AddIcon from '@mui/icons-material/Add'
+// icons
+import PublicIcon from '@mui/icons-material/Public'
 // materials
 import Avatar from '@mui/material/Avatar'
 import Box from '@mui/material/Box'
 import Chip from '@mui/material/Chip'
 import IconButton from '@mui/material/IconButton'
 import Stack from '@mui/material/Stack'
-// icons
-import PublicIcon from '@mui/icons-material/Public'
-import AddIcon from '@mui/icons-material/Add'
+import type React from 'react'
+import { useEffect, useState } from 'react'
 // utils
 import sendToBgScript from '../../utils/sendToBgScript'
 

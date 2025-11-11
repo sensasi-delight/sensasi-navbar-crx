@@ -1,5 +1,5 @@
-import { createRoot } from 'react-dom/client'
 import React from 'react'
+import { createRoot } from 'react-dom/client'
 import OptionsPage from './components/OptionsPage'
 import AppProvider from './hooks/AppProvider'
 
