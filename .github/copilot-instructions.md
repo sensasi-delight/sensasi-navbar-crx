@@ -7,11 +7,13 @@ Chrome extension that provides a navigation bar for fullscreen browsing (F11 mod
 
 ## Architecture
 
-### Extension Entry Points (Webpack bundles)
+### Extension Entry Points (Vite + @crxjs/vite-plugin)
 - `content_script.tsx` - Injected into all pages, renders navbar via Shadow DOM
 - `background.ts` - Service worker handling Chrome API calls (tabs, history)
-- `popup.tsx` - Extension popup UI
-- `options.tsx` - Extension settings page
+- `popup.tsx` - Extension popup UI (loaded via `src/popup.html`)
+- `options.tsx` - Extension settings page (loaded via `src/options.html`)
+
+**Build System**: Uses Vite with `@crxjs/vite-plugin` for fast HMR and optimized builds. Plugin automatically handles manifest processing, code splitting, and Chrome extension requirements.
 
 ### Key Communication Pattern
 Content script → Background script communication uses **typed message passing**:
@@ -43,12 +45,11 @@ Navbar renders in Shadow DOM (`content_script.tsx:25-30`) for CSS isolation:
 
 ### Build Commands
 ```bash
-bun run dev     # Watch mode, builds to .build/, appends "(dev)" to extension name
-bun run build   # Production build, strips "(dev)"
+bun run dev     # Vite dev mode with HMR - auto-reloads extension on changes
+bun run build   # Production build optimized for Chrome extension
 bun run test    # Jest with ts-jest via Bun
-bun run check   # Biome check (format + lint) with auto-fix
-bun run format  # Biome format only
-bun run lint    # Biome lint only
+bun run lint    # Biome check (format + lint) with auto-fix
+bun run lint:fix # Biome format with auto-fix
 ```
 
 **Important**: Use `bun` commands, not `npm`. Bun is significantly faster for install and script execution.
@@ -63,11 +64,14 @@ bun outdated          # Check for outdated packages
 ```
 
 ### Loading Extension
-1. `bun run dev` → generates `.build/` directory
+1. `bun run dev` → generates `.build/` directory with HMR enabled
 2. Chrome Extensions → Developer mode → Load unpacked → select `.build/`
-3. Changes auto-rebuild, manually reload extension in Chrome
+3. Changes auto-rebuild and **auto-reload** extension (thanks to Vite HMR)
 
-**Note**: Build output is `.build/` NOT `dist/` (README mentions dist for releases only)
+**Note**: 
+- Build output is `.build/` NOT `dist/`
+- Vite's HMR automatically reloads the extension during development
+- No manual reload needed in most cases (except manifest changes)
 
 ## Code Quality
 
