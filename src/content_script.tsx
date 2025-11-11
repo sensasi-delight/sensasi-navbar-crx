@@ -1,5 +1,4 @@
 // vendors
-import * as Sentry from '@sentry/react'
 import { createRoot } from 'react-dom/client'
 import { CacheProvider } from '@emotion/react'
 import createCache from '@emotion/cache'
@@ -10,19 +9,7 @@ import ThemeProvider from './components/ThemeProvider'
 // hooks
 import AppProvider from './hooks/AppProvider'
 
-function initializeSentry(): void {
-  if (process.env.NODE_ENV === 'production') {
-    Sentry.init({
-      dsn: 'https://f02bd0f29c0c6074f76bf383da2f6b2c@o1289319.ingest.us.sentry.io/4507187102613504',
-      integrations: [Sentry.browserTracingIntegration()],
-      tracesSampleRate: 1.0,
-    })
-  }
-}
-
 function initializeApp(): void {
-  initializeSentry()
-
   const rootElement = document.createElement('div')
   rootElement.id = 'sensasi-navbar-root'
   document.body.insertAdjacentElement('beforebegin', rootElement)
