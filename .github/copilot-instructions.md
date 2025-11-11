@@ -45,10 +45,9 @@ Navbar renders in Shadow DOM (`content_script.tsx:25-30`) for CSS isolation:
 
 ### Build Commands
 ```bash
-bun run dev     # Vite dev mode with HMR - auto-reloads extension on changes
-bun run build   # Production build optimized for Chrome extension
-bun run test    # Jest with ts-jest via Bun
-bun run lint    # Biome check (format + lint) with auto-fix
+bun run dev      # Vite dev mode with HMR - auto-reloads extension on changes
+bun run build    # Production build optimized for Chrome extension
+bun run lint     # Biome check (format + lint) with auto-fix
 bun run lint:fix # Biome format with auto-fix
 ```
 
@@ -121,12 +120,6 @@ Manifest v3 requires:
 - `"storage"` for settings sync
 - `"history"` for address bar suggestions  
 - `"host_permissions": ["<all_urls>"]` for content script injection
-
-## Testing
-- Jest configured with `ts-jest` transform, run via Bun
-- Test files in `src/__tests__/`
-- Run tests with `bun run test` or `bun test`
-- No E2E tests currently - consider Puppeteer for extension testing
 
 ## Common Pitfalls
 - Don't import from `/index` files directly - use folder paths (barrel exports handle it)
