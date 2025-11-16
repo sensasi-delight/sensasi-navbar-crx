@@ -1,19 +1,17 @@
-// types
-
 // materials
 import Dialog from '@mui/material/Dialog'
 import Grow from '@mui/material/Grow'
-import type { ReactElement, ReactNode } from 'react'
 // vendors
-import { memo, useEffect, useState } from 'react'
+import type { ReactNode } from 'react'
+import { useEffect, useState } from 'react'
 
 let timeout: NodeJS.Timeout
 
-function NavbarAutoHideWrapper({
+export default function NavbarAutoHideWrapper({
   children,
 }: {
   children: ReactNode
-}): ReactElement {
+}) {
   const [isShow, setIsShow] = useState(false)
 
   useEffect(() => {
@@ -75,5 +73,3 @@ function NavbarAutoHideWrapper({
     </Dialog>
   )
 }
-
-export default memo(NavbarAutoHideWrapper)

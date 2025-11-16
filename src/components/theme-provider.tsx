@@ -1,9 +1,9 @@
-import { ThemeProvider as MuiThemeProvider } from '@mui/material/styles'
-import type { ThemeProviderProps } from '@mui/material/styles/ThemeProvider'
-// hooks
-import { useAppContext } from '../../hooks/AppProvider'
-// utils
-import getTheme from '../../utils/getTheme'
+import {
+  ThemeProvider as MuiThemeProvider,
+  type ThemeProviderProps,
+} from '@mui/material/styles'
+import getTheme from '../utils/get-theme'
+import { useAppContext } from './app-provider'
 
 export default function ThemeProvider({
   children,
@@ -11,7 +11,7 @@ export default function ThemeProvider({
   ...rest
 }: Omit<ThemeProviderProps, 'theme'> & {
   containerElement?: HTMLDivElement
-}): JSX.Element {
+}) {
   const { settings } = useAppContext()
 
   return (

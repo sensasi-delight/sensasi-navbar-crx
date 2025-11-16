@@ -1,9 +1,8 @@
 import CssBaseline from '@mui/material/CssBaseline'
 import { ThemeProvider } from '@mui/material/styles'
-import type { ReactNode } from 'react'
-import { useAppContext } from '../../hooks/AppProvider'
-import getTheme from '../../utils/getTheme'
-import OptionsForm from './Form'
+import getTheme from '../utils/get-theme'
+import { useAppContext } from './app-provider'
+import OptionsForm from './options-page-components/form'
 
 const mainContent = (
   <>
@@ -18,7 +17,7 @@ const mainContent = (
   </>
 )
 
-export default function OptionsPage(): ReactNode {
+export default function OptionsPage() {
   const { settings } = useAppContext()
 
   return (

@@ -1,14 +1,13 @@
 // vendors
-
 import createCache from '@emotion/cache'
 import { CacheProvider } from '@emotion/react'
 import React from 'react'
 import { createRoot } from 'react-dom/client'
-// component
-import Navbar from './components/Navbar'
-import ThemeProvider from './components/ThemeProvider'
 // hooks
-import AppProvider from './hooks/AppProvider'
+import AppProvider from './components/app-provider'
+// component
+import Navbar from './components/navbar'
+import ThemeProvider from './components/theme-provider'
 
 function initializeApp(): void {
   const rootElement = document.createElement('div')

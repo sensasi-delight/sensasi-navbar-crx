@@ -12,9 +12,9 @@ import MenuItem from '@mui/material/MenuItem'
 import Switch from '@mui/material/Switch'
 import React from 'react'
 // hooks
-import { useAppContext } from '../../../hooks/AppProvider'
+import { useAppContext } from '../app-provider'
 
-export default function OptionsMenu(): JSX.Element {
+export default function OptionsMenu() {
   const { settings, setSettings } = useAppContext()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
