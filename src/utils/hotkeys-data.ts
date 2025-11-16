@@ -45,7 +45,7 @@ const HOTKEYS_DATA: Hotkey[] = [
     category: 'tabs',
     description: 'Jump to last tab',
     keys: 'ctrl + 9',
-  }
+  },
 ]
 
 export default HOTKEYS_DATA
