@@ -3,7 +3,7 @@
 import type { ReactNode } from 'react'
 // vendors
 import { createContext, useContext, useEffect, useState } from 'react'
-import type { Settings } from '../types/settings-temp'
+import type { Settings } from '../types/settings'
 
 const DEFAULT_VALUE: Settings = {
   theme: 'dark',
