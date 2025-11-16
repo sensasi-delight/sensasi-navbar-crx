@@ -1,79 +1,156 @@
-# Sensasi Navbar
+# 🚀 Sensasi Navbar
 
 ![build](https://github.com/sensasi-delight/sensasi-navbar-crx/workflows/build/badge.svg)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Sensasi Navbar is a Chrome extension designed to enhance navigation within the browser, particularly when Chrome is in full-screen mode (F11). It provides a navigation bar that assists in navigating through tabs, offering convenience and ease of use.
+> **A modern Chrome extension that brings back your navigation bar in fullscreen mode (F11)** 🧭
+
+Experience seamless browsing in fullscreen mode with a beautiful, auto-hiding navigation bar. Built with React 19, TypeScript, and Material-UI for a smooth and modern interface.
 
 ![2024-05-0304-40-04-ezgif com-optimize](https://github.com/sensasi-delight/sensasi-navbar-crx/assets/19289785/ee0ebe90-5f53-449b-8bb4-6c3aaba1c4d0)
 
-> **Contents:**
->
-> - [Installation](#installation)
-> - [Development](#development)
->   - [Directory Structure](#directory-structure)
->   - [Setup](#setup)
->   - [Build](#build)
->   - [Load Extension to Chrome](#load-extension-to-chrome)
->   - [Test](#test)
-> - [Contributing](#contributing)
-> - [License](#license)
-> - [Support](#support)
+---
 
-## Installation
+## ✨ Features
 
-Sensasi Navbar is not yet available on the Chrome Web Store. To install the extension, follow the steps below:
+- 🎨 **Modern UI** - Clean design with Material-UI components
+- 🔄 **Auto-Hide** - Appears when you need it, hides when you don't
+- ⌨️ **Keyboard Shortcuts** - Quick access with hotkeys
+- 📑 **Tab Management** - Easy switching between open tabs
+- 🔍 **Smart Address Bar** - Quick navigation and history search
+- 🎯 **Fullscreen Optimized** - Perfect for F11 browsing mode
+- ⚡ **Fast & Lightweight** - Built with Vite for optimal performance
 
-1. Download the latest release from the [releases page](https://github.com/sensasi-delight/sensasi-navbar-crx/releases) and extract the `dist` directory from the `.zip` file.
-2. Open Chrome Extensions page: [chrome://extensions/](chrome://extensions/).
-3. Enable `Developer mode`.
-4. Click `Load unpacked`.
-5. Choose the `dist` directory from step 1.
+---
 
-## Development
+## 📦 Installation
 
-### Directory Structure
+### From Release (Recommended)
 
-- `./src/typescript`: TypeScript source files
-- `./src/assets`: static files
-- `./.build`: Unpacked version of Chrome Extension directory
-- `./.build/js`: Generated JavaScript files
+1. **Download** the latest release from the [releases page](https://github.com/sensasi-delight/sensasi-navbar-crx/releases)
+2. **Extract** the `.zip` file to get the `.build` folder
+3. **Open** Chrome Extensions: `chrome://extensions/`
+4. **Enable** Developer mode (toggle in top-right corner)
+5. **Click** "Load unpacked" button
+6. **Select** the extracted `.build` folder
 
-### Setup
+### Build from Source
 
-```bash
-npm install
+See the [Development](#️-development) section below.
+
+---
+
+## 🛠️ Development
+
+### Prerequisites
+
+- [Bun](https://bun.sh) - Fast JavaScript runtime (instead of Node.js)
+- Google Chrome browser
+
+### Tech Stack
+
+- ⚛️ **React 19** with TypeScript
+- 🎨 **Material-UI v7** for components
+- ⚡ **Vite** for blazing fast builds
+- 🔧 **@crxjs/vite-plugin** for Chrome extension support
+- 🧹 **Biome** for linting and formatting
+
+### Project Structure
+
+```text
+sensasi-navbar-crx/
+├── src/
+│   ├── background.ts           # Background service worker
+│   ├── content_script.tsx      # Navbar injection (Shadow DOM)
+│   ├── popup.tsx               # Extension popup
+│   ├── options.tsx             # Settings page
+│   ├── components/             # React components
+│   ├── types/                  # TypeScript types
+│   └── utils/                  # Helper functions
+├── public/
+│   ├── manifest.json           # Extension manifest
+│   └── icons/                  # Extension icons
+└── .build/                     # Build output (auto-generated)
 ```
 
-### Build
+### Quick Start
+
+1. **Install dependencies**
+
+   ```bash
+   bun install
+   ```
+
+2. **Start development server**
+
+   ```bash
+   bun run dev
+   ```
+
+   This will create a `.build/` folder with hot-reload enabled.
+
+3. **Load extension in Chrome**
+
+   - Open `chrome://extensions/`
+   - Enable "Developer mode"
+   - Click "Load unpacked"
+   - Select the `.build/` folder
+
+4. **Make changes**
+   - Edit files in `src/`
+   - Extension auto-reloads on save ⚡
+
+### Build Commands
 
 ```bash
-# production build
-npm run build
-
-# development build
-npm run dev
+bun run dev        # 🔥 Development build with HMR
+bun run build      # 📦 Production build
+bun run lint       # 🔍 Check code quality
+bun run lint:fix   # ✨ Auto-fix formatting issues
 ```
 
-### Load Extension to Chrome
+### Code Guidelines
 
-<!-- markdownlint-disable-next-line MD033 -->
-1. Open Chrome Extensions page: [chrome://extensions/](chrome://extensions/).
-2. Enable `Developer mode`.
-3. Click `Load unpacked`.
-4. Load the `.build` directory.
+- Use **kebab-case** for file names: `my-component.tsx`
+- Use **path alias** `@/` for imports: `import Navbar from '@/components/navbar'`
+- Follow **Biome** formatting rules (enforced automatically)
+- Write **functional components** with TypeScript
+- Use **React hooks** for state management
 
-### Test
+---
 
-`npx jest` or `npm run test`
+## 🤝 Contributing
 
-## Contributing
+We welcome contributions! Here's how you can help:
 
-Contributions are welcome! Feel free to [fork the repository](https://github.com/sensasi-delight/sensasi-navbar-crx/fork), make your changes, and submit a pull request. Any suggestions, bug reports, or feature requests can also be submitted through the GitHub [issues page](https://github.com/sensasi-delight/sensasi-navbar-crx/issues).
+1. **Fork** the repository
+2. **Create** a new branch: `git checkout -b feature/amazing-feature`
+3. **Make** your changes
+4. **Commit** your changes: `git commit -m 'Add amazing feature'`
+5. **Push** to the branch: `git push origin feature/amazing-feature`
+6. **Open** a Pull Request
 
-## License
+### Reporting Issues
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+Found a bug? Have a feature request? Please open an issue on our [GitHub Issues](https://github.com/sensasi-delight/sensasi-navbar-crx/issues) page.
 
-## Support
+---
 
-For any inquiries or support requests, please contact [zainadam.id@gmail.com](mailto:zainadam.id@gmail.com).
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 💬 Support
+
+Need help or have questions?
+
+- 🐛 Issues: [GitHub Issues](https://github.com/sensasi-delight/sensasi-navbar-crx/issues)
+- 💡 Discussions: [GitHub Discussions](https://github.com/sensasi-delight/sensasi-navbar-crx/discussions)
+
+---
+
+**Made with ❤️ by [🍕](https://github.com/sensasi-delight)**
+
+⭐ Star this repo if you find it helpful!
