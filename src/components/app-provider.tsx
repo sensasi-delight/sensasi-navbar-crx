@@ -4,7 +4,6 @@ import type Settings from '@/types/settings'
 
 const DEFAULT_VALUE: Settings = {
   iconOpacity: 0.5,
-  isAutoHide: true,
   theme: 'dark',
 }
 

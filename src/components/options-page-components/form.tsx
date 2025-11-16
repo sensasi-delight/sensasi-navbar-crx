@@ -30,54 +30,30 @@ export default function OptionsForm(): React.ReactElement {
         />
       </FormGroup>
 
-      <FormGroup>
-        <FormControlLabel
-          control={<Switch checked={settings.isAutoHide} />}
-          label="Auto Hide"
-          onClick={event => {
-            event.preventDefault()
+      <FormGroup sx={{ mt: 2 }}>
+        <FormLabel>Icon Opacity</FormLabel>
 
-            setSettings({
-              ...settings,
-              isAutoHide: !settings.isAutoHide,
-            })
-          }}
-        />
+        <Stack direction="row" spacing={2} sx={{ alignItems: 'center' }}>
+          <Slider
+            aria-label="Icon Opacity"
+            max={1}
+            min={0}
+            onChange={(_, value) => {
+              setSettings({
+                ...settings,
+                iconOpacity: value,
+              })
+            }}
+            step={0.1}
+            value={settings.iconOpacity}
+            valueLabelDisplay="auto"
+          />
+        </Stack>
 
-        {settings.isAutoHide && (
-          <FormHelperText>
-            Hover over the compass icon in the top-left corner to show the
-            navbar.
-          </FormHelperText>
-        )}
+        <FormHelperText>
+          Adjust the visibility of the compass icon trigger.
+        </FormHelperText>
       </FormGroup>
-
-      {settings.isAutoHide && (
-        <FormGroup sx={{ mt: 2 }}>
-          <FormLabel>Icon Opacity</FormLabel>
-
-          <Stack direction="row" spacing={2} sx={{ alignItems: 'center' }}>
-            <Slider
-              aria-label="Icon Opacity"
-              max={1}
-              min={0}
-              onChange={(_, value) => {
-                setSettings({
-                  ...settings,
-                  iconOpacity: value,
-                })
-              }}
-              step={0.1}
-              value={settings.iconOpacity}
-              valueLabelDisplay="auto"
-            />
-          </Stack>
-
-          <FormHelperText>
-            Adjust the visibility of the compass icon trigger.
-          </FormHelperText>
-        </FormGroup>
-      )}
     </form>
   )
 }

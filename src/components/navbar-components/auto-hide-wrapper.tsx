@@ -35,9 +35,7 @@ export default function NavbarAutoHideWrapper({
     <>
       <CompassIconTrigger
         onTrigger={() => {
-          if (!isShow) {
-            setIsShow(true)
-          }
+          setIsShow(true)
         }}
       />
 
@@ -70,7 +68,7 @@ export default function NavbarAutoHideWrapper({
             alignItems: 'flex-start',
           },
           minWidth: '20em',
-          zIndex: theme.zIndex.appBar + 1,
+          zIndex: theme.zIndex.appBar,
         })}>
         {children}
       </Dialog>
