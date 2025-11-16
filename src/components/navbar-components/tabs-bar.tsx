@@ -1,7 +1,5 @@
-// vendors
-
-import AddIcon from '@mui/icons-material/Add'
 // icons
+import AddIcon from '@mui/icons-material/Add'
 import PublicIcon from '@mui/icons-material/Public'
 // materials
 import Avatar from '@mui/material/Avatar'
@@ -9,10 +7,11 @@ import Box from '@mui/material/Box'
 import Chip from '@mui/material/Chip'
 import IconButton from '@mui/material/IconButton'
 import Stack from '@mui/material/Stack'
+// vendors
 import type React from 'react'
 import { useEffect, useState } from 'react'
 // utils
-import sendToBgScript from '../../utils/sendToBgScript'
+import sendToBgScript from '../../utils/send-to-bg-script'
 
 export default function TabsBar(): React.ReactElement {
   const [tabs, setTabs] = useState<chrome.tabs.Tab[]>([])

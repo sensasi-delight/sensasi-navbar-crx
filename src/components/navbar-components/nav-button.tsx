@@ -1,16 +1,13 @@
-// types
-
 // icons
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 import IconButton from '@mui/material/IconButton'
-import type { ReactElement } from 'react'
 
 export default function NavButton({
   variant,
 }: {
   variant: 'back' | 'forward'
-}): ReactElement {
+}) {
   return (
     // TODO: fix disabled state
     // TODO: right click menu show history of current tab

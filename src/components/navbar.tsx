@@ -4,17 +4,17 @@
 import Container from '@mui/material/Container'
 import Paper from '@mui/material/Paper'
 import Stack from '@mui/material/Stack'
-import type { ReactElement, ReactNode } from 'react'
+import type { ReactNode } from 'react'
 // etc
-import { useAppContext } from '../../hooks/AppProvider'
+import { useAppContext } from './app-provider'
 // components
-import AddressBar from './AddressBar'
-import NavbarAutoHideWrapper from './AutoHideWrapper'
-import NavButtons from './NavButtons'
-import OptionsMenu from './OptionsMenu'
-import TabsBar from './TabsBar'
+import AddressBar from './navbar-components/address-bar'
+import NavbarAutoHideWrapper from './navbar-components/auto-hide-wrapper'
+import NavButtons from './navbar-components/nav-buttons'
+import OptionsMenu from './navbar-components/options-menu'
+import TabsBar from './navbar-components/tabs-bar'
 
-function NavbarWrapper({ children }: { children: ReactNode }): ReactElement {
+function NavbarWrapper({ children }: { children: ReactNode }) {
   const { settings } = useAppContext()
   const { isAutoHide } = settings
 
@@ -36,7 +36,7 @@ function NavbarWrapper({ children }: { children: ReactNode }): ReactElement {
   )
 }
 
-export default function Navbar(): ReactElement {
+export default function Navbar() {
   return (
     <NavbarWrapper>
       <TabsBar />

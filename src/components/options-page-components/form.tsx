@@ -7,7 +7,7 @@ import FormHelperText from '@mui/material/FormHelperText'
 import Switch from '@mui/material/Switch'
 import type React from 'react'
 // etc
-import { useAppContext } from '../../hooks/AppProvider'
+import { useAppContext } from '../app-provider'
 
 export default function OptionsForm(): React.ReactElement {
   const { settings, setSettings } = useAppContext()

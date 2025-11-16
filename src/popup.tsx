@@ -1,7 +1,7 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
-import OptionsPage from './components/OptionsPage'
-import AppProvider from './hooks/AppProvider'
+import AppProvider from './components/app-provider'
+import OptionsPage from './components/options-page'
 
 const rootEl = document.getElementById('root')
 rootEl?.style.setProperty('width', '15rem')

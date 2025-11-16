@@ -14,7 +14,7 @@ import { useEffect } from 'react'
 // components
 // import BookmarkButton from './BookmarkButton'
 // utils
-import isHrefable from '../../../utils/isHrefable'
+import isHrefable from '../../../utils/is-hrefable'
 
 const ADDORNMENT_ICON_SYTLE: CSSProperties = {
   fontSize: '1em',

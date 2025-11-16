@@ -1,4 +1,4 @@
-import type ActionPayload from '../types/ActionPayload'
+import type ActionPayload from '../types/action-payload'
 
 export default function sendToBgScript<T = unknown>(
   action: ActionPayload['action'],

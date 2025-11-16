@@ -3,8 +3,7 @@
 import type { ReactNode } from 'react'
 // vendors
 import { createContext, useContext, useEffect, useState } from 'react'
-import type { Settings } from '../types/Settings'
-import type { AppContextType } from './AppContext.type'
+import type { Settings } from '../types/settings-temp'
 
 const DEFAULT_VALUE: Settings = {
   theme: 'dark',
@@ -66,3 +65,8 @@ export default function AppProvider({
 }
 
 export const useAppContext = (): AppContextType => useContext(AppContext)
+
+interface AppContextType {
+  settings: Settings
+  setSettings: (settings: Settings) => void
+}

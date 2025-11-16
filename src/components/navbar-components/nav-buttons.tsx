@@ -1,13 +1,10 @@
-// types
-
 // icons
 import RefreshIcon from '@mui/icons-material/Refresh'
 import IconButton from '@mui/material/IconButton'
-import type { ReactElement } from 'react'
 // components
-import NavButton from './NavButton'
+import NavButton from './nav-button'
 
-export default function NavButtons(): ReactElement {
+export default function NavButtons() {
   return (
     <div
       style={{
