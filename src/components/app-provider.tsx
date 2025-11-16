@@ -3,6 +3,7 @@ import { createContext, useContext, useEffect, useState } from 'react'
 import type Settings from '@/types/settings'
 
 const DEFAULT_VALUE: Settings = {
+  iconOpacity: 0.5,
   isAutoHide: true,
   theme: 'dark',
 }
@@ -49,10 +50,7 @@ export default function AppProvider({
   const setSettings = (newSettings: Settings): void => {
     chrome.storage.sync.set(
       {
-        settings: {
-          isAutoHide: newSettings.isAutoHide,
-          theme: newSettings.theme,
-        },
+        settings: newSettings,
       },
       () => {},
     )

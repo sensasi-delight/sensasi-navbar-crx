@@ -1,3 +1,4 @@
+import CssBaseline from '@mui/material/CssBaseline'
 import {
   ThemeProvider as MuiThemeProvider,
   type ThemeProviderProps,
@@ -18,6 +19,8 @@ export default function ThemeProvider({
     <MuiThemeProvider
       theme={getTheme(settings.theme, containerElement)}
       {...rest}>
+      <CssBaseline />
+
       {children}
     </MuiThemeProvider>
   )
