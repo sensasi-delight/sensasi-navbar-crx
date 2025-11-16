@@ -6,9 +6,9 @@ import type { AutocompleteRenderInputParams } from '@mui/material/Autocomplete'
 import InputAdornment from '@mui/material/InputAdornment'
 import TextField from '@mui/material/TextField'
 // vendors
-import { type ReactElement, useEffect, useEffectEvent } from 'react'
+import { useEffect, useEffectEvent } from 'react'
 // utils
-import isHrefable from '@/utils/is-valid-url'
+import isValidUrl from '@/utils/is-valid-url'
 
 const ADORNMENT_ICON_STYLE = {
   fontSize: '1em',
@@ -16,7 +16,7 @@ const ADORNMENT_ICON_STYLE = {
 
 export default function AddressBarTextfield(
   props: AutocompleteRenderInputParams & { value: string },
-): ReactElement {
+) {
   const handleF6Press = useEffectEvent((event: KeyboardEvent): void => {
     if (event.key === 'F6') {
       event.preventDefault()
@@ -74,7 +74,7 @@ export default function AddressBarTextfield(
                 marginLeft: '0.2em',
                 opacity: 0.5,
               }}>
-              {isHrefable(props.value) ? (
+              {isValidUrl(props.value) ? (
                 <LanguageIcon style={ADORNMENT_ICON_STYLE} />
               ) : (
                 <GoogleIcon style={ADORNMENT_ICON_STYLE} />

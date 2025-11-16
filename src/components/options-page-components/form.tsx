@@ -6,12 +6,10 @@ import FormLabel from '@mui/material/FormLabel'
 import Slider from '@mui/material/Slider'
 import Stack from '@mui/material/Stack'
 import Switch from '@mui/material/Switch'
-// vendors
-import type React from 'react'
 // etc
 import { useAppContext } from '@/components/app-provider'
 
-export default function OptionsForm(): React.ReactElement {
+export default function OptionsForm() {
   const { settings, setSettings } = useAppContext()
 
   return (
