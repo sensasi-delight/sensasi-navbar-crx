@@ -20,18 +20,22 @@ export default function AppProvider({
   const [settings, setSettingsState] = useState<Settings>(DEFAULT_VALUE)
 
   useEffect(() => {
-    chrome.storage.sync.get('settings', ({ settings }) => {
-      if (settings !== undefined) {
+    chrome.storage.sync.get<{
+      settings?: Settings
+    }>('settings', ({ settings }) => {
+      if (settings) {
         setSettingsState(settings)
       }
     })
 
     function handleChanges(
-      changes: Record<string, chrome.storage.StorageChange>,
-      area: 'sync' | 'local' | 'managed' | 'session',
+      changes: {
+        [key: string]: chrome.storage.StorageChange
+      },
+      area: chrome.storage.AreaName,
     ): void {
       if (area === 'sync' && changes.settings?.newValue !== undefined) {
-        setSettingsState(changes.settings.newValue)
+        setSettingsState(changes.settings.newValue as Settings)
       }
     }
 
