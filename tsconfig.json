@@ -7,15 +7,13 @@
     "moduleResolution": "bundler",
     "noEmit": true,
     "noEmitOnError": true,
-    "outDir": "dist/js",
     "paths": {
       "@/*": ["./src/*"]
     },
-    "rootDir": "src",
     "sourceMap": false,
     "strict": true,
-    "target": "ES2022",
+    "target": "es2020",
     "typeRoots": ["node_modules/@types"]
   },
-  "include": ["../vite.config.ts"]
+  "include": ["src", "vite.config.ts"]
 }
