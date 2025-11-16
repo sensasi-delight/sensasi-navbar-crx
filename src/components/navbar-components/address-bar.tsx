@@ -1,22 +1,21 @@
+'use client'
+
 import Autocomplete from '@mui/material/Autocomplete'
 import Typography from '@mui/material/Typography'
 import { useDebounce } from '@uidotdev/usehooks'
 import type { HTMLAttributes, ReactElement } from 'react'
-import { useCallback, useEffect, useState } from 'react'
-import { convertToHttps } from '../../utils/convert-to-https'
-import isHrefable from '../../utils/is-hrefable'
-import sendToBgScript from '../../utils/send-to-bg-script'
-import AddressBarTextfield from './address-bar-components/text-field'
+import { useEffect, useEffectEvent, useState } from 'react'
+import AddressBarTextfield from '@/components/navbar-components/address-bar-components/text-field'
+import isValidUrl from '@/utils/is-valid-url'
+import sendToBgScript from '@/utils/send-to-bg-script'
 
 export default function AddressBar(): ReactElement {
   const [value, setValue] = useState('')
-
-  const [isLoading, setIsLoading] = useState(false)
   const [suggestions, setSuggestions] = useState<chrome.history.HistoryItem[]>(
     [],
   )
 
-  const updateSuggestions = useCallback((query = ''): void => {
+  const updateSuggestions = useEffectEvent((query: string): void => {
     sendToBgScript(
       'getHistorySuggestions',
       {
@@ -24,25 +23,36 @@ export default function AddressBar(): ReactElement {
       },
       (response: chrome.history.HistoryItem[]) => {
         setSuggestions(response)
-        setIsLoading(false)
       },
     )
-  }, [])
+  })
 
   const debouncedSearchTerm = useDebounce(value, 300)
 
   useEffect(() => {
     updateSuggestions(debouncedSearchTerm)
-  }, [debouncedSearchTerm, updateSuggestions])
-
-  useEffect(() => {
-    if (!isLoading) {
-      setIsLoading(true)
-    }
-  }, [isLoading])
+  }, [debouncedSearchTerm])
 
   return (
     <Autocomplete
+      defaultValue={{
+        id: '',
+        url: location.href,
+      }}
+      disableClearable
+      freeSolo
+      getOptionLabel={option =>
+        typeof option === 'string' ? option : (option.url as string)
+      }
+      onChange={HANDLE_AUTOCOMPLETE_CHANGE}
+      onInputChange={(_, newValue) => {
+        setValue(newValue)
+      }}
+      openOnFocus={true}
+      options={suggestions}
+      renderInput={params => <AddressBarTextfield {...params} value={value} />}
+      renderOption={HANDLE_RENDER_OPTION}
+      size="small"
       slotProps={{
         popper: {
           sx: {
@@ -51,42 +61,22 @@ export default function AddressBar(): ReactElement {
         },
       }}
       sx={{
-        flexGrow: 1,
         '& .MuiInputBase-root': {
           backgroundColor: 'rgba(0,0,0,0.1)',
         },
+        flexGrow: 1,
       }}
-      freeSolo
-      disableClearable
-      size="small"
-      onChange={HANDLE_AUTOCOMPLETE_CHANGE}
-      renderOption={HANDLE_RENDER_OPTION}
-      options={suggestions}
-      openOnFocus={true}
-      defaultValue={{
-        id: '',
-        url: location.href,
-      }}
-      onInputChange={(_event, newValue) => {
-        setValue(newValue)
-      }}
-      getOptionLabel={option =>
-        typeof option === 'string' ? option : (option.url as string)
-      }
-      renderInput={params => (
-        <AddressBarTextfield {...params} value={value} loading={isLoading} />
-      )}
     />
   )
 }
 
 const HANDLE_AUTOCOMPLETE_CHANGE = (
   _: unknown,
-  newValue: NonNullable<string | chrome.history.HistoryItem>,
+  newValue: string | chrome.history.HistoryItem,
 ): void => {
   if (typeof newValue === 'string') {
-    if (isHrefable(newValue)) {
-      location.href = convertToHttps(newValue)
+    if (isValidUrl(newValue)) {
+      location.href = newValue
     } else {
       location.href = `https://google.com/search?q=${newValue}`
     }
@@ -103,6 +93,7 @@ const HANDLE_RENDER_OPTION = (
 ): ReactElement => (
   <li
     {...props}
+    key={option.id}
     style={{
       whiteSpace: 'nowrap',
     }}>
@@ -110,10 +101,10 @@ const HANDLE_RENDER_OPTION = (
       <Typography component="span" variant="body2">
         {option.title}
       </Typography>
-      <Typography variant="caption" component="span">
+      <Typography component="span" variant="caption">
         {' - '}
       </Typography>
-      <Typography color="info.main" variant="caption" component="span">
+      <Typography color="info.main" component="span" variant="caption">
         {option.url}
       </Typography>
     </div>

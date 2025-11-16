@@ -13,10 +13,10 @@ export default function NavButton({
     // TODO: right click menu show history of current tab
     <IconButton
       disabled={history.length === 1}
-      size="small"
       onClick={() => {
         variant === 'forward' ? history.forward() : history.back()
-      }}>
+      }}
+      size="small">
       {variant === 'forward' ? <ArrowForwardIcon /> : <ArrowBackIcon />}
     </IconButton>
   )

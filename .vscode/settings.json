@@ -1,14 +1,6 @@
 {
-  "typescript.tsdk": "./node_modules/typescript/lib",
-  "files.eol": "\n",
-  "json.schemas": [
-    {
-      "fileMatch": [
-        "/manifest.json"
-      ],
-      "url": "http://json.schemastore.org/chrome-manifest"
-    }
-  ],
-  "editor.tabSize": 2,
-  "eslint.format.enable": true
+  "editor.codeActionsOnSave": {
+    "source.fixAll.biome": "explicit"
+  },
+  "editor.tabSize": 2
 }

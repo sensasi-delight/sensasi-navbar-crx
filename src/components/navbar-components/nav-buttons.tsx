@@ -2,7 +2,7 @@
 import RefreshIcon from '@mui/icons-material/Refresh'
 import IconButton from '@mui/material/IconButton'
 // components
-import NavButton from './nav-button'
+import NavButton from '@/components/navbar-components/nav-button'
 
 export default function NavButtons() {
   return (
@@ -14,10 +14,10 @@ export default function NavButtons() {
       <NavButton variant="forward" />
 
       <IconButton
-        size="small"
         onClick={() => {
           location.reload()
-        }}>
+        }}
+        size="small">
         <RefreshIcon />
       </IconButton>
     </div>

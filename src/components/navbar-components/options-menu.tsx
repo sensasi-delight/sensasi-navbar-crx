@@ -12,7 +12,7 @@ import MenuItem from '@mui/material/MenuItem'
 import Switch from '@mui/material/Switch'
 import React from 'react'
 // hooks
-import { useAppContext } from '../app-provider'
+import { useAppContext } from '@/components/app-provider'
 
 export default function OptionsMenu() {
   const { settings, setSettings } = useAppContext()
@@ -35,14 +35,14 @@ export default function OptionsMenu() {
 
       <Menu
         anchorEl={anchorEl}
-        open={open}
         disablePortal
         onClose={handleClose}
+        open={open}
         sx={{
-          minWidth: '10em',
           '& li': {
             justifyContent: 'space-between',
           },
+          minWidth: '10em',
         }}>
         <MenuItem
           dense
@@ -68,10 +68,10 @@ export default function OptionsMenu() {
         </MenuItem>
         <Divider />
         <MenuItem
+          component="a"
           dense
           href="https://support.google.com/chrome/answer/157179"
-          target="_blank"
-          component="a">
+          target="_blank">
           <ListItemText>HotKeys</ListItemText>
           <OpenInNewIcon fontSize="small" />
         </MenuItem>
