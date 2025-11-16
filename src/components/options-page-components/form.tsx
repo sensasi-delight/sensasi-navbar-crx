@@ -7,7 +7,7 @@ import FormHelperText from '@mui/material/FormHelperText'
 import Switch from '@mui/material/Switch'
 import type React from 'react'
 // etc
-import { useAppContext } from '../app-provider'
+import { useAppContext } from '@/components/app-provider'
 
 export default function OptionsForm(): React.ReactElement {
   const { settings, setSettings } = useAppContext()
@@ -16,6 +16,8 @@ export default function OptionsForm(): React.ReactElement {
     <form>
       <FormGroup>
         <FormControlLabel
+          control={<Switch checked={settings.theme === 'dark'} />}
+          label="Dark Mode"
           onClick={event => {
             event.preventDefault()
             setSettings({
@@ -23,12 +25,12 @@ export default function OptionsForm(): React.ReactElement {
               theme: settings.theme === 'dark' ? 'light' : 'dark',
             })
           }}
-          control={<Switch checked={settings.theme === 'dark'} />}
-          label="Dark Mode"
         />
       </FormGroup>
       <FormGroup>
         <FormControlLabel
+          control={<Switch checked={settings.isAutoHide} />}
+          label="Auto Hide"
           onClick={event => {
             event.preventDefault()
 
@@ -37,8 +39,6 @@ export default function OptionsForm(): React.ReactElement {
               isAutoHide: !settings.isAutoHide,
             })
           }}
-          control={<Switch checked={settings.isAutoHide} />}
-          label="Auto Hide"
         />
 
         {settings.isAutoHide && (

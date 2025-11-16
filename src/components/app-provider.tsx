@@ -1,18 +1,15 @@
-// types
-
 import type { ReactNode } from 'react'
-// vendors
 import { createContext, useContext, useEffect, useState } from 'react'
-import type { Settings } from '../types/settings'
+import type Settings from '@/types/settings'
 
 const DEFAULT_VALUE: Settings = {
-  theme: 'dark',
   isAutoHide: true,
+  theme: 'dark',
 }
 
 const AppContext = createContext<AppContextType>({
-  settings: DEFAULT_VALUE,
   setSettings: () => {},
+  settings: DEFAULT_VALUE,
 })
 
 export default function AppProvider({
@@ -49,8 +46,8 @@ export default function AppProvider({
     chrome.storage.sync.set(
       {
         settings: {
-          theme: newSettings.theme,
           isAutoHide: newSettings.isAutoHide,
+          theme: newSettings.theme,
         },
       },
       () => {},
@@ -58,7 +55,7 @@ export default function AppProvider({
   }
 
   return (
-    <AppContext.Provider value={{ settings, setSettings }}>
+    <AppContext.Provider value={{ setSettings, settings }}>
       {children}
     </AppContext.Provider>
   )

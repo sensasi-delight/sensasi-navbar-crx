@@ -1,101 +1,89 @@
-// types
-
 // icons
 import GoogleIcon from '@mui/icons-material/Google'
 import LanguageIcon from '@mui/icons-material/Language'
-import type { AutocompleteRenderInputParams } from '@mui/material/Autocomplete'
 // materials
-import CircularProgress from '@mui/material/CircularProgress'
+import type { AutocompleteRenderInputParams } from '@mui/material/Autocomplete'
 import InputAdornment from '@mui/material/InputAdornment'
 import TextField from '@mui/material/TextField'
-import type { CSSProperties, ReactElement } from 'react'
 // vendors
-import { useEffect } from 'react'
-// components
-// import BookmarkButton from './BookmarkButton'
+import { type ReactElement, useEffect, useEffectEvent } from 'react'
 // utils
-import isHrefable from '../../../utils/is-hrefable'
+import isHrefable from '@/utils/is-valid-url'
 
-const ADDORNMENT_ICON_SYTLE: CSSProperties = {
+const ADORNMENT_ICON_STYLE = {
   fontSize: '1em',
-}
+} as const
 
 export default function AddressBarTextfield(
-  props: AutocompleteRenderInputParams & { value: string; loading: boolean },
+  props: AutocompleteRenderInputParams & { value: string },
 ): ReactElement {
-  const { loading, ...rest } = props
+  const handleF6Press = useEffectEvent((event: KeyboardEvent): void => {
+    if (event.key === 'F6') {
+      event.preventDefault()
 
-  useEffect(() => {
-    const handleF6Press = (event: KeyboardEvent): void => {
-      if (event.key === 'F6') {
-        event.preventDefault()
+      if (
+        props.inputProps.ref !== null &&
+        'current' in props.inputProps.ref &&
+        props.inputProps.ref.current !== null
+      ) {
+        const inputEl = props.inputProps.ref.current
 
-        // TODO: remove the possibility to fired the focus event when the address bar is already focused
-        if (
-          rest.inputProps.ref !== null &&
-          'current' in rest.inputProps.ref &&
-          rest.inputProps.ref.current !== null
-        ) {
-          const inputEl = rest.inputProps.ref.current
-
-          setTimeout(() => {
-            inputEl.focus()
-          }, 200)
-        }
+        setTimeout(() => {
+          inputEl.focus()
+        }, 200)
       }
     }
+  })
 
+  useEffect(() => {
     window.addEventListener('keydown', handleF6Press)
 
     return () => {
       window.removeEventListener('keydown', handleF6Press)
     }
-  }, [rest.inputProps.ref])
+  })
 
   return (
     <TextField
-      {...rest}
-      InputProps={{
-        ...rest.InputProps,
-        startAdornment: (
-          <InputAdornment
-            position="start"
-            style={{
-              marginLeft: '0.2em',
-              opacity: 0.5,
-            }}>
-            {isHrefable(rest.value) ? (
-              <LanguageIcon style={ADDORNMENT_ICON_SYTLE} />
-            ) : (
-              <GoogleIcon style={ADDORNMENT_ICON_SYTLE} />
-            )}
-          </InputAdornment>
-        ),
-        onFocus: event => {
-          event.target.select()
-        },
-
-        // TODO: fix bookmark button, disabled for now
-        // endAdornment: (
-        //   <InputAdornment position="end">
-        //     <BookmarkButton />
-        //   </InputAdornment>
-        // ),
-
-        endAdornment: (
-          <InputAdornment position="end">
-            {loading ? <CircularProgress color="inherit" size={20} /> : null}
-          </InputAdornment>
-        ),
-        inputProps: {
-          ...rest.inputProps,
+      {...props}
+      slotProps={{
+        htmlInput: {
+          ...props.inputProps,
           style: {
-            padding: 0,
             fontSize: '.85em',
+            padding: 0,
           },
         },
-        style: {
-          borderRadius: '2rem',
+        input: {
+          ...props.InputProps,
+
+          // TODO: fix bookmark button, disabled for now
+          // endAdornment: (
+          //   <InputAdornment position="end">
+          //     <BookmarkButton />
+          //   </InputAdornment>
+          // ),
+
+          onFocus: event => {
+            event.target.select()
+          },
+          startAdornment: (
+            <InputAdornment
+              position="start"
+              style={{
+                marginLeft: '0.2em',
+                opacity: 0.5,
+              }}>
+              {isHrefable(props.value) ? (
+                <LanguageIcon style={ADORNMENT_ICON_STYLE} />
+              ) : (
+                <GoogleIcon style={ADORNMENT_ICON_STYLE} />
+              )}
+            </InputAdornment>
+          ),
+          style: {
+            borderRadius: '2rem',
+          },
         },
       }}
     />

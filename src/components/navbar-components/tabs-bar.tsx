@@ -11,7 +11,7 @@ import Stack from '@mui/material/Stack'
 import type React from 'react'
 import { useEffect, useState } from 'react'
 // utils
-import sendToBgScript from '../../utils/send-to-bg-script'
+import sendToBgScript from '@/utils/send-to-bg-script'
 
 export default function TabsBar(): React.ReactElement {
   const [tabs, setTabs] = useState<chrome.tabs.Tab[]>([])
@@ -39,32 +39,27 @@ export default function TabsBar(): React.ReactElement {
 
   return (
     <Stack
+      alignItems="center"
+      direction="row"
+      gap={0.5}
       mb={1}
       mr={2}
       pr={2}
-      gap={0.5}
-      direction="row"
-      whiteSpace="nowrap"
-      alignItems="center"
-      sx={TABS_ROOT_SX}>
+      sx={TABS_ROOT_SX}
+      whiteSpace="nowrap">
       {tabs.map(tab => {
         if (tab.title === undefined) return undefined
 
         return (
           <Chip
-            size="small"
-            sx={{
-              minWidth: '8em',
-              textOverflow: 'ellipsis',
-            }}
-            key={tab.id}
-            label={tab.title}
-            color={tab.id === thisTabId ? 'primary' : undefined}
             avatar={
               <Avatar alt={tab.title} src={tab.favIconUrl}>
                 <PublicIcon />
               </Avatar>
             }
+            color={tab.id === thisTabId ? 'primary' : undefined}
+            key={tab.id}
+            label={tab.title}
             onClick={() => {
               sendToBgScript('setActiveTab', { tabId: tab.id ?? 0 })
             }}
@@ -72,6 +67,11 @@ export default function TabsBar(): React.ReactElement {
               sendToBgScript('removeTab', { tabId: tab.id ?? 0 }, () => {
                 setTabs(prev => prev.filter(prevTab => prevTab.id !== tab.id))
               })
+            }}
+            size="small"
+            sx={{
+              minWidth: '8em',
+              textOverflow: 'ellipsis',
             }}
           />
         )
@@ -89,12 +89,12 @@ export default function TabsBar(): React.ReactElement {
           right: 16,
         }}>
         <IconButton
+          onClick={() => {
+            sendToBgScript('newTab')
+          }}
           size="small"
           sx={{
             p: '1px',
-          }}
-          onClick={() => {
-            sendToBgScript('newTab')
           }}>
           <AddIcon />
         </IconButton>
@@ -104,29 +104,26 @@ export default function TabsBar(): React.ReactElement {
 }
 
 const TABS_ROOT_SX = {
-  overflowX: 'auto',
-
-  scrollbarColor: 'initial',
-
   '::-webkit-scrollbar': {
-    width: '5px',
     height: '5px',
+    width: '5px',
   },
 
   '::-webkit-scrollbar-thumb': {
-    borderRadius: '5px',
-    backgroundColor: 'rgba(128,128,128,0.5)',
-
     '&:hover': {
       backgroundColor: 'rgba(128,128,128,0.7)',
     },
+    backgroundColor: 'rgba(128,128,128,0.5)',
+    borderRadius: '5px',
   },
 
   '::-webkit-scrollbar-track': {
-    backgroundColor: 'rgba(128,128,128,0.1)',
-
     '&:hover': {
       backgroundColor: 'rgba(128,128,128,0.2)',
     },
+    backgroundColor: 'rgba(128,128,128,0.1)',
   },
+  overflowX: 'auto',
+
+  scrollbarColor: 'initial',
 }

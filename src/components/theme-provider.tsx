@@ -2,8 +2,8 @@ import {
   ThemeProvider as MuiThemeProvider,
   type ThemeProviderProps,
 } from '@mui/material/styles'
-import getTheme from '../utils/get-theme'
-import { useAppContext } from './app-provider'
+import { useAppContext } from '@/components/app-provider'
+import getTheme from '@/utils/get-theme'
 
 export default function ThemeProvider({
   children,

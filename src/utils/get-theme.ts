@@ -16,17 +16,17 @@ export default function getTheme(
 
   if (shadowRootElement !== undefined) {
     opts.components = {
+      MuiModal: {
+        defaultProps: {
+          container: shadowRootElement,
+        },
+      },
       MuiPopover: {
         defaultProps: {
           container: shadowRootElement,
         },
       },
       MuiPopper: {
-        defaultProps: {
-          container: shadowRootElement,
-        },
-      },
-      MuiModal: {
         defaultProps: {
           container: shadowRootElement,
         },

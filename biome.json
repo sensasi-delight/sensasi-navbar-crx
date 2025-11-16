@@ -1,9 +1,15 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.3.4/schema.json",
-  "vcs": {
-    "enabled": true,
-    "clientKind": "git",
-    "useIgnoreFile": true
+  "$schema": "https://biomejs.dev/schemas/2.3.5/schema.json",
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": "on",
+        "useSortedAttributes": "on",
+        "useSortedKeys": "on",
+        "useSortedProperties": "on"
+      }
+    },
+    "enabled": true
   },
   "files": {
     "ignoreUnknown": false
@@ -15,6 +21,13 @@
     "indentWidth": 2,
     "lineEnding": "lf"
   },
+  "javascript": {
+    "formatter": {
+      "arrowParentheses": "asNeeded",
+      "quoteStyle": "single",
+      "semicolons": "asNeeded"
+    }
+  },
   "linter": {
     "domains": {
       "react": "recommended"
@@ -23,7 +36,6 @@
     "rules": {
       "recommended": true,
       "style": {
-        "recommended": true,
         "noRestrictedImports": {
           "level": "error",
           "options": {
@@ -32,21 +44,18 @@
               "@mui/material": "No Barrel Import. Use `import [Component] from '@mui/material/[Component]'` instead."
             }
           }
-        }
+        },
+        "recommended": true,
+        "useFilenamingConvention": "error"
       },
       "suspicious": {
         "noExplicitAny": "warn"
       }
     }
   },
-  "javascript": {
-    "formatter": {
-      "quoteStyle": "single",
-      "semicolons": "asNeeded",
-      "arrowParentheses": "asNeeded"
-    }
-  },
-  "assist": {
-    "enabled": true
+  "vcs": {
+    "clientKind": "git",
+    "enabled": true,
+    "useIgnoreFile": true
   }
 }

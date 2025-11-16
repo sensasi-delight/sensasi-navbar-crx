@@ -1,28 +1,18 @@
 import CssBaseline from '@mui/material/CssBaseline'
 import { ThemeProvider } from '@mui/material/styles'
-import getTheme from '../utils/get-theme'
-import { useAppContext } from './app-provider'
-import OptionsForm from './options-page-components/form'
-
-const mainContent = (
-  <>
-    <CssBaseline />
-    <div
-      style={{
-        margin: '1rem 1.5rem',
-      }}>
-      <CssBaseline />
-      <OptionsForm />
-    </div>
-  </>
-)
+import { useAppContext } from '@/components/app-provider'
+import OptionsForm from '@/components/options-page-components/form'
+import getTheme from '@/utils/get-theme'
 
 export default function OptionsPage() {
   const { settings } = useAppContext()
 
   return (
-    <ThemeProvider theme={getTheme(settings.theme)}>
-      {mainContent}
-    </ThemeProvider>
+    <div style={{ padding: '1rem' }}>
+      <ThemeProvider theme={getTheme(settings.theme)}>
+        <CssBaseline />
+        <OptionsForm />
+      </ThemeProvider>
+    </div>
   )
 }

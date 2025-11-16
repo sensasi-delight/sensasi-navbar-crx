@@ -1,5 +1,4 @@
-// types
-import type ActionPayload from './types/action-payload'
+import type ActionPayload from '@/types/action-payload'
 
 chrome.runtime.onMessage.addListener(
   (message: ActionPayload, sender, sendResponse) => {
