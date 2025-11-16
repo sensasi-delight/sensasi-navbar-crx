@@ -13,9 +13,8 @@ import TabsBar from '@/components/navbar-components/tabs-bar'
 
 function NavbarWrapper({ children }: { children: ReactNode }) {
   const { settings } = useAppContext()
-  const { isAutoHide } = settings
 
-  if (isAutoHide) {
+  if (settings.isAutoHide) {
     return <NavbarAutoHideWrapper>{children}</NavbarAutoHideWrapper>
   }
 

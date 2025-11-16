@@ -14,7 +14,7 @@ import { useEffect, useState } from 'react'
 import sendToBgScript from '@/utils/send-to-bg-script'
 
 export default function TabsBar(): React.ReactElement {
-  const [tabs, setTabs] = useState<chrome.tabs.Tab[]>([])
+  const [tabs, setTabs] = useState<chrome.tabs.Tab[] | undefined>()
   const [thisTabId, setThisTabId] = useState<number>()
 
   function getAndSetTabs(): void {
@@ -47,7 +47,7 @@ export default function TabsBar(): React.ReactElement {
       pr={2}
       sx={TABS_ROOT_SX}
       whiteSpace="nowrap">
-      {tabs.map(tab => {
+      {tabs?.map(tab => {
         if (tab.title === undefined) return undefined
 
         return (
@@ -65,7 +65,7 @@ export default function TabsBar(): React.ReactElement {
             }}
             onDelete={() => {
               sendToBgScript('removeTab', { tabId: tab.id ?? 0 }, () => {
-                setTabs(prev => prev.filter(prevTab => prevTab.id !== tab.id))
+                setTabs(prev => prev?.filter(prevTab => prevTab.id !== tab.id))
               })
             }}
             size="small"
@@ -126,4 +126,4 @@ const TABS_ROOT_SX = {
   overflowX: 'auto',
 
   scrollbarColor: 'initial',
-}
+} as const
