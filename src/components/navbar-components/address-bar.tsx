@@ -3,13 +3,13 @@
 import Autocomplete from '@mui/material/Autocomplete'
 import Typography from '@mui/material/Typography'
 import { useDebounce } from '@uidotdev/usehooks'
-import type { HTMLAttributes, ReactElement } from 'react'
+import type { HTMLAttributes } from 'react'
 import { useEffect, useEffectEvent, useState } from 'react'
 import AddressBarTextfield from '@/components/navbar-components/address-bar-components/text-field'
 import isValidUrl from '@/utils/is-valid-url'
 import sendToBgScript from '@/utils/send-to-bg-script'
 
-export default function AddressBar(): ReactElement {
+export default function AddressBar() {
   const [value, setValue] = useState('')
   const [suggestions, setSuggestions] = useState<chrome.history.HistoryItem[]>(
     [],
@@ -90,7 +90,7 @@ const HANDLE_AUTOCOMPLETE_CHANGE = (
 const HANDLE_RENDER_OPTION = (
   props: HTMLAttributes<HTMLLIElement>,
   option: chrome.history.HistoryItem,
-): ReactElement => (
+) => (
   <li
     {...props}
     key={option.id}

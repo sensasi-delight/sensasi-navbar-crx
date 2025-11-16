@@ -1,4 +1,4 @@
-import React from 'react'
+import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import AppProvider from '@/components/app-provider'
 import OptionsPage from '@/components/options-page'
@@ -10,9 +10,9 @@ if (rootEl === null) {
 }
 
 createRoot(rootEl).render(
-  <React.StrictMode>
+  <StrictMode>
     <AppProvider>
       <OptionsPage />
     </AppProvider>
-  </React.StrictMode>,
+  </StrictMode>,
 )

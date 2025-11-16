@@ -90,10 +90,7 @@ bun outdated          # Check for outdated packages
 // Always use kebab-case for file names: app-provider.tsx, send-to-bg-script.ts
 // Use path alias @/ for src/ imports (configured in vite.config.ts)
 
-// types (if needed)
-import type { ReactElement } from 'react'
 // vendors (React, third-party, MUI)
-import React from 'react'
 import Button from '@mui/material/Button'
 // local imports with @/ alias
 import Navbar from '@/components/navbar'
@@ -104,7 +101,6 @@ import sendToBgScript from '@/utils/send-to-bg-script'
 ### Component Patterns
 - **Functional components only** - React 19 with automatic optimizations via React Compiler
 - **Named exports** for utilities, **default export** for main components
-- Use `ReactElement` return type, not `JSX.Element`
 - Memoization handled by React Compiler - only add manual `memo()` for expensive components
 - File naming: `kebab-case.tsx` for all files (components, utils, types)
 

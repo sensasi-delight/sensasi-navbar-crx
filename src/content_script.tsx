@@ -1,7 +1,7 @@
 // vendors
 import createCache from '@emotion/cache'
 import { CacheProvider } from '@emotion/react'
-import React from 'react'
+import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 // component
 import AppProvider from '@/components/app-provider'
@@ -18,7 +18,7 @@ const shadowRootElement = document.createElement('div')
 shadowContainer.appendChild(shadowRootElement)
 
 createRoot(shadowRootElement).render(
-  <React.StrictMode>
+  <StrictMode>
     <CacheProvider
       value={createCache({
         container: shadowContainer,
@@ -31,5 +31,5 @@ createRoot(shadowRootElement).render(
         </AppProvider>
       </ThemeProvider>
     </CacheProvider>
-  </React.StrictMode>,
+  </StrictMode>,
 )

@@ -8,12 +8,11 @@ import Chip from '@mui/material/Chip'
 import IconButton from '@mui/material/IconButton'
 import Stack from '@mui/material/Stack'
 // vendors
-import type React from 'react'
 import { useEffect, useState } from 'react'
 // utils
 import sendToBgScript from '@/utils/send-to-bg-script'
 
-export default function TabsBar(): React.ReactElement {
+export default function TabsBar() {
   const [tabs, setTabs] = useState<chrome.tabs.Tab[] | undefined>()
   const [thisTabId, setThisTabId] = useState<number>()
 
