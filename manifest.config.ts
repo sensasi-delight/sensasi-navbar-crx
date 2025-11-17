@@ -10,13 +10,15 @@ export default defineManifest({
             128: 'icons/icon128.png',
         },
         default_popup: 'src/popup.html',
+        default_title: 'Sensasi Navbar',
     },
+    author: packageJson.author,
     background: {
-        service_worker: 'src/background.ts',
+        service_worker: 'src/service-worker.ts',
     },
     content_scripts: [
         {
-            js: ['src/content_script.tsx'],
+            js: ['src/inject-navbar.tsx'],
             matches: ['<all_urls>'],
         },
     ],
@@ -24,9 +26,6 @@ export default defineManifest({
     host_permissions: ['<all_urls>'],
     manifest_version: 3,
     name: 'Sensasi Navbar',
-    options_ui: {
-        page: 'src/options.html',
-    },
     permissions: ['storage', 'history'],
     version: packageJson.version,
 })
