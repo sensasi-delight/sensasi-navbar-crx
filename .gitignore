@@ -5,7 +5,7 @@ tmp/
 
 # Build output
 .build/
-dist/
+.dist/
 
 # Other common ignore patterns
 .DS_Store
