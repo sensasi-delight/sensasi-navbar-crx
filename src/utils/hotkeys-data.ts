@@ -8,6 +8,11 @@ const HOTKEYS_DATA: Hotkey[] = [
     },
     {
         category: 'general',
+        description: 'Fullscreen mode',
+        keys: 'F11',
+    },
+    {
+        category: 'general',
         description: 'Show hotkeys reference',
         keys: 'ctrl + /',
     },
