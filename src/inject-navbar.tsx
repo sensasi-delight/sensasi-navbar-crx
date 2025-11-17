@@ -17,14 +17,15 @@ const shadowRootElement = document.createElement('div')
 
 shadowContainer.appendChild(shadowRootElement)
 
+const cache = createCache({
+    container: shadowContainer,
+    key: 'sensasi-navbar-css',
+    prepend: true,
+})
+
 createRoot(shadowRootElement).render(
     <StrictMode>
-        <CacheProvider
-            value={createCache({
-                container: shadowContainer,
-                key: 'sensasi-navbar-css',
-                prepend: true,
-            })}>
+        <CacheProvider value={cache}>
             <ThemeProvider containerElement={shadowRootElement}>
                 <AppProvider>
                     <Navbar />

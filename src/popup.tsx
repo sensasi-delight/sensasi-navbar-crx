@@ -9,8 +9,6 @@ if (rootEl === null) {
     throw new Error('root element not found')
 }
 
-rootEl.style.minWidth = '15rem'
-
 createRoot(rootEl).render(
     <StrictMode>
         <AppProvider>
