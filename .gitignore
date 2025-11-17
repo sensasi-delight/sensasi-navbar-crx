@@ -1,5 +1,12 @@
-npm-debug.log
+*.log
 node_modules/
-.build/
 .env.sentry-build-plugin
 tmp/
+
+# Build output
+.build/
+dist/
+
+# Other common ignore patterns
+.DS_Store
+Thumbs.db

@@ -42,5 +42,6 @@
     "lint": "biome check && tsc --noEmit",
     "lint:fix": "biome check --write"
   },
-  "version": "0.1.1"
+  "type": "module",
+  "version": "0.1.2"
 }
