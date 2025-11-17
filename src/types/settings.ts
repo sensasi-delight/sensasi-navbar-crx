@@ -1,4 +1,4 @@
 export default interface Settings {
-  theme: 'light' | 'dark'
-  iconOpacity: number
+    theme: 'light' | 'dark'
+    iconOpacity: number
 }

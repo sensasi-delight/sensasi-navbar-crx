@@ -12,64 +12,64 @@ import { type MouseEvent, useState } from 'react'
 import OptionsForm from '@/components/options-page-components/form'
 
 export default function OptionsMenu({
-  onShowHotkeys,
+    onShowHotkeys,
 }: {
-  onShowHotkeys: () => void
+    onShowHotkeys: () => void
 }) {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
-  const open = Boolean(anchorEl)
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+    const open = Boolean(anchorEl)
 
-  const handleClick = (event: MouseEvent<HTMLButtonElement>): void => {
-    setAnchorEl(event.currentTarget)
-  }
+    const handleClick = (event: MouseEvent<HTMLButtonElement>): void => {
+        setAnchorEl(event.currentTarget)
+    }
 
-  const handleClose = (): void => {
-    setAnchorEl(null)
-  }
+    const handleClose = (): void => {
+        setAnchorEl(null)
+    }
 
-  const handleShowHotkeys = (): void => {
-    handleClose()
-    onShowHotkeys()
-  }
+    const handleShowHotkeys = (): void => {
+        handleClose()
+        onShowHotkeys()
+    }
 
-  return (
-    <div>
-      <IconButton onClick={handleClick} size="small">
-        <MoreVertIcon />
-      </IconButton>
+    return (
+        <div>
+            <IconButton onClick={handleClick} size="small">
+                <MoreVertIcon />
+            </IconButton>
 
-      <Menu
-        anchorEl={anchorEl}
-        disablePortal
-        onClose={handleClose}
-        open={open}
-        slotProps={{
-          list: {
-            component: 'div',
-            sx: {
-              padding: '1rem 1.5rem',
-            },
-          },
-        }}>
-        <OptionsForm />
+            <Menu
+                anchorEl={anchorEl}
+                disablePortal
+                onClose={handleClose}
+                open={open}
+                slotProps={{
+                    list: {
+                        component: 'div',
+                        sx: {
+                            padding: '1rem 1.5rem',
+                        },
+                    },
+                }}>
+                <OptionsForm />
 
-        <Box
-          sx={{
-            borderTop: '1px solid',
-            borderTopColor: 'divider',
-            mt: 2,
-            pt: 2,
-          }}>
-          <Button
-            fullWidth
-            onClick={handleShowHotkeys}
-            size="small"
-            startIcon={<KeyboardIcon />}
-            variant="outlined">
-            Keyboard Shortcuts
-          </Button>
-        </Box>
-      </Menu>
-    </div>
-  )
+                <Box
+                    sx={{
+                        borderTop: '1px solid',
+                        borderTopColor: 'divider',
+                        mt: 2,
+                        pt: 2,
+                    }}>
+                    <Button
+                        fullWidth
+                        onClick={handleShowHotkeys}
+                        size="small"
+                        startIcon={<KeyboardIcon />}
+                        variant="outlined">
+                        Keyboard Shortcuts
+                    </Button>
+                </Box>
+            </Menu>
+        </div>
+    )
 }

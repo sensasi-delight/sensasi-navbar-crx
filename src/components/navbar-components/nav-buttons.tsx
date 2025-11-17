@@ -5,21 +5,21 @@ import IconButton from '@mui/material/IconButton'
 import NavButton from '@/components/navbar-components/nav-button'
 
 export default function NavButtons() {
-  return (
-    <div
-      style={{
-        marginRight: '1em',
-      }}>
-      <NavButton variant="back" />
-      <NavButton variant="forward" />
+    return (
+        <div
+            style={{
+                marginRight: '1em',
+            }}>
+            <NavButton variant="back" />
+            <NavButton variant="forward" />
 
-      <IconButton
-        onClick={() => {
-          location.reload()
-        }}
-        size="small">
-        <RefreshIcon />
-      </IconButton>
-    </div>
-  )
+            <IconButton
+                onClick={() => {
+                    location.reload()
+                }}
+                size="small">
+                <RefreshIcon />
+            </IconButton>
+        </div>
+    )
 }

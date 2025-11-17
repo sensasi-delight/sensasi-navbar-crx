@@ -14,51 +14,51 @@ import TabsBar from '@/components/navbar-components/tabs-bar'
 import sendToBgScript from '@/utils/send-to-bg-script'
 
 export default function Navbar() {
-  const [isHotkeysOpen, setIsHotkeysOpen] = useState(false)
-  const [thisTabId, setThisTabId] = useState<number>()
+    const [isHotkeysOpen, setIsHotkeysOpen] = useState(false)
+    const [thisTabId, setThisTabId] = useState<number>()
 
-  const handleKeyPress = useEffectEvent((event: KeyboardEvent): void => {
-    if (event.ctrlKey && event.key === '/') {
-      event.preventDefault()
-      setIsHotkeysOpen(true)
-    }
-  })
+    const handleKeyPress = useEffectEvent((event: KeyboardEvent): void => {
+        if (event.ctrlKey && event.key === '/') {
+            event.preventDefault()
+            setIsHotkeysOpen(true)
+        }
+    })
 
-  useEffect(() => {
-    sendToBgScript(
-      'getSelfInfo',
-      undefined,
-      (response: chrome.runtime.MessageSender) => {
-        setThisTabId(response.tab?.id)
-      },
+    useEffect(() => {
+        sendToBgScript(
+            'getSelfInfo',
+            undefined,
+            (response: chrome.runtime.MessageSender) => {
+                setThisTabId(response.tab?.id)
+            },
+        )
+    }, [])
+
+    useEffect(() => {
+        window.addEventListener('keydown', handleKeyPress)
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyPress)
+        }
+    }, [])
+
+    return (
+        <>
+            <LoadingIndicator tabId={thisTabId} />
+            <NavbarAutoHideWrapper>
+                <TabsBar />
+
+                <Stack alignItems="center" direction="row" whiteSpace="nowrap">
+                    <NavButtons />
+                    <AddressBar />
+                    <OptionsMenu onShowHotkeys={() => setIsHotkeysOpen(true)} />
+                </Stack>
+            </NavbarAutoHideWrapper>
+
+            <HotkeysDialog
+                onClose={() => setIsHotkeysOpen(false)}
+                open={isHotkeysOpen}
+            />
+        </>
     )
-  }, [])
-
-  useEffect(() => {
-    window.addEventListener('keydown', handleKeyPress)
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyPress)
-    }
-  }, [])
-
-  return (
-    <>
-      <LoadingIndicator tabId={thisTabId} />
-      <NavbarAutoHideWrapper>
-        <TabsBar />
-
-        <Stack alignItems="center" direction="row" whiteSpace="nowrap">
-          <NavButtons />
-          <AddressBar />
-          <OptionsMenu onShowHotkeys={() => setIsHotkeysOpen(true)} />
-        </Stack>
-      </NavbarAutoHideWrapper>
-
-      <HotkeysDialog
-        onClose={() => setIsHotkeysOpen(false)}
-        open={isHotkeysOpen}
-      />
-    </>
-  )
 }

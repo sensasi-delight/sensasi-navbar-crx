@@ -8,32 +8,32 @@ import { name, version } from './package.json'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  build: {
-    outDir: '.build',
-  },
-  plugins: [
-    react(),
-    babel({
-      babelConfig: {
-        plugins: ['babel-plugin-react-compiler'],
-      },
-    }),
-    crx({ manifest }),
-    zip({
-      inDir: '.build',
-      outDir: '.dist',
-      outFileName: `${name}-v${version}.zip`,
-    }),
-  ],
-  resolve: {
-    alias: {
-      '@': '/src',
+    build: {
+        outDir: '.build',
     },
-    dedupe: ['@emotion/react'],
-  },
-  server: {
-    cors: {
-      origin: [/chrome-extension:\/\//],
+    plugins: [
+        react(),
+        babel({
+            babelConfig: {
+                plugins: ['babel-plugin-react-compiler'],
+            },
+        }),
+        crx({ manifest }),
+        zip({
+            inDir: '.build',
+            outDir: '.dist',
+            outFileName: `${name}-v${version}.zip`,
+        }),
+    ],
+    resolve: {
+        alias: {
+            '@': '/src',
+        },
+        dedupe: ['@emotion/react'],
     },
-  },
+    server: {
+        cors: {
+            origin: [/chrome-extension:\/\//],
+        },
+    },
 })

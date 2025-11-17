@@ -5,26 +5,26 @@ import Box from '@mui/material/Box'
 import { useAppContext } from '@/components/app-provider'
 
 export default function NavbarIconTrigger({
-  onTrigger,
+    onTrigger,
 }: {
-  onTrigger: () => void
+    onTrigger: () => void
 }) {
-  const { settings } = useAppContext()
+    const { settings } = useAppContext()
 
-  const handleOnMouseEnter = (): void => {
-    onTrigger()
-  }
+    const handleOnMouseEnter = (): void => {
+        onTrigger()
+    }
 
-  return (
-    <Box
-      onMouseEnter={handleOnMouseEnter}
-      padding={1}
-      sx={theme => ({
-        opacity: settings.iconOpacity,
-        position: 'fixed',
-        zIndex: theme.zIndex.appBar + 1,
-      })}>
-      <ExploreTwoToneIcon color="inherit" />
-    </Box>
-  )
+    return (
+        <Box
+            onMouseEnter={handleOnMouseEnter}
+            padding={1}
+            sx={theme => ({
+                opacity: settings.iconOpacity,
+                position: 'fixed',
+                zIndex: theme.zIndex.appBar + 1,
+            })}>
+            <ExploreTwoToneIcon color="inherit" />
+        </Box>
+    )
 }

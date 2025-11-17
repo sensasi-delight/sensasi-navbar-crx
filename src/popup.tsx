@@ -6,15 +6,15 @@ import OptionsPage from '@/components/options-page'
 const rootEl = document.getElementById('root')
 
 if (rootEl === null) {
-  throw new Error('root element not found')
+    throw new Error('root element not found')
 }
 
 rootEl.style.minWidth = '15rem'
 
 createRoot(rootEl).render(
-  <StrictMode>
-    <AppProvider>
-      <OptionsPage />
-    </AppProvider>
-  </StrictMode>,
+    <StrictMode>
+        <AppProvider>
+            <OptionsPage />
+        </AppProvider>
+    </StrictMode>,
 )
