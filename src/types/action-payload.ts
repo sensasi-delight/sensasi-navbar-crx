@@ -17,5 +17,11 @@ type ActionPayload =
       action: 'newTab'
       data: undefined
     }
+  | {
+      action: 'getTabLoadingStatus'
+      data: {
+        tabId: number
+      }
+    }
 
 export default ActionPayload

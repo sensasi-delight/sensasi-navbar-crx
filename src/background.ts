@@ -39,6 +39,12 @@ chrome.runtime.onMessage.addListener(
           sendResponse,
         )
         break
+
+      case 'getTabLoadingStatus':
+        chrome.tabs.get(message.data.tabId, tab => {
+          sendResponse({ loading: tab.status === 'loading' })
+        })
+        break
     }
 
     return true

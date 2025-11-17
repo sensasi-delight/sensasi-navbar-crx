@@ -23,6 +23,7 @@ export default defineConfig({
     alias: {
       '@': '/src',
     },
+    dedupe: ['@emotion/react']
   },
   server: {
     hmr: {
