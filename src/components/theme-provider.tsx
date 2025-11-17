@@ -1,27 +1,27 @@
 import CssBaseline from '@mui/material/CssBaseline'
 import {
-  ThemeProvider as MuiThemeProvider,
-  type ThemeProviderProps,
+    ThemeProvider as MuiThemeProvider,
+    type ThemeProviderProps,
 } from '@mui/material/styles'
 import { useAppContext } from '@/components/app-provider'
 import getTheme from '@/utils/get-theme'
 
 export default function ThemeProvider({
-  children,
-  containerElement,
-  ...rest
+    children,
+    containerElement,
+    ...rest
 }: Omit<ThemeProviderProps, 'theme'> & {
-  containerElement?: HTMLDivElement
+    containerElement?: HTMLDivElement
 }) {
-  const { settings } = useAppContext()
+    const { settings } = useAppContext()
 
-  return (
-    <MuiThemeProvider
-      theme={getTheme(settings.theme, containerElement)}
-      {...rest}>
-      <CssBaseline />
+    return (
+        <MuiThemeProvider
+            theme={getTheme(settings.theme, containerElement)}
+            {...rest}>
+            <CssBaseline />
 
-      {children}
-    </MuiThemeProvider>
-  )
+            {children}
+        </MuiThemeProvider>
+    )
 }

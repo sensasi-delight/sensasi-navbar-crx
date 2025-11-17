@@ -1,61 +1,61 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.3.5/schema.json",
-  "assist": {
-    "actions": {
-      "source": {
-        "organizeImports": "on",
-        "useSortedAttributes": "on",
-        "useSortedKeys": "on",
-        "useSortedProperties": "on"
-      }
-    },
-    "enabled": true
-  },
-  "files": {
-    "ignoreUnknown": false
-  },
-  "formatter": {
-    "bracketSameLine": true,
-    "enabled": true,
-    "indentStyle": "space",
-    "indentWidth": 2,
-    "lineEnding": "lf"
-  },
-  "javascript": {
-    "formatter": {
-      "arrowParentheses": "asNeeded",
-      "quoteStyle": "single",
-      "semicolons": "asNeeded"
-    }
-  },
-  "linter": {
-    "domains": {
-      "react": "recommended"
-    },
-    "enabled": true,
-    "rules": {
-      "recommended": true,
-      "style": {
-        "noRestrictedImports": {
-          "level": "error",
-          "options": {
-            "paths": {
-              "@mui/icons-material": "No Barrel Import. Use `import [Icon] from '@mui/icons-material/[Icon]'` instead.",
-              "@mui/material": "No Barrel Import. Use `import [Component] from '@mui/material/[Component]'` instead."
+    "$schema": "https://biomejs.dev/schemas/2.3.5/schema.json",
+    "assist": {
+        "actions": {
+            "source": {
+                "organizeImports": "on",
+                "useSortedAttributes": "on",
+                "useSortedKeys": "on",
+                "useSortedProperties": "on"
             }
-          }
         },
-        "recommended": true,
-        "useFilenamingConvention": "error"
-      },
-      "suspicious": {
-        "noExplicitAny": "warn"
-      }
+        "enabled": true
+    },
+    "files": {
+        "ignoreUnknown": false
+    },
+    "formatter": {
+        "bracketSameLine": true,
+        "enabled": true,
+        "indentStyle": "space",
+        "indentWidth": 4,
+        "lineEnding": "lf"
+    },
+    "javascript": {
+        "formatter": {
+            "arrowParentheses": "asNeeded",
+            "quoteStyle": "single",
+            "semicolons": "asNeeded"
+        }
+    },
+    "linter": {
+        "domains": {
+            "react": "recommended"
+        },
+        "enabled": true,
+        "rules": {
+            "recommended": true,
+            "style": {
+                "noRestrictedImports": {
+                    "level": "error",
+                    "options": {
+                        "paths": {
+                            "@mui/icons-material": "No Barrel Import. Use `import [Icon] from '@mui/icons-material/[Icon]'` instead.",
+                            "@mui/material": "No Barrel Import. Use `import [Component] from '@mui/material/[Component]'` instead."
+                        }
+                    }
+                },
+                "recommended": true,
+                "useFilenamingConvention": "error"
+            },
+            "suspicious": {
+                "noExplicitAny": "warn"
+            }
+        }
+    },
+    "vcs": {
+        "clientKind": "git",
+        "enabled": true,
+        "useIgnoreFile": true
     }
-  },
-  "vcs": {
-    "clientKind": "git",
-    "enabled": true,
-    "useIgnoreFile": true
-  }
 }
