@@ -27,12 +27,15 @@ Experience seamless browsing in fullscreen mode with a beautiful, auto-hiding na
 
 ### From Release (Recommended)
 
-1. **Download** the latest release from the [releases page](https://github.com/sensasi-delight/sensasi-navbar-crx/releases)
-2. **Extract** the `.zip` file to get the `.build` folder
-3. **Open** Chrome Extensions: `chrome://extensions/`
-4. **Enable** Developer mode (toggle in top-right corner)
-5. **Click** "Load unpacked" button
-6. **Select** the extracted `.build` folder
+1. **Download** the latest `sensasi-navbar-crx-v*.zip` release from the [releases page](https://github.com/sensasi-delight/sensasi-navbar-crx/releases)
+2. **Create** a new folder for the extension (e.g., `sensasi-navbar`)
+3. **Extract** the contents of `sensasi-navbar-crx-v*.zip` file into that folder
+4. **Open** Chrome Extensions page:
+   - Type `chrome://extensions/` in the address bar and press Enter, OR
+   - Click the three-dot menu (⋮) → Extensions → Manage Extensions
+5. **Enable** Developer mode (toggle in top-right corner)
+6. **Click** "Load unpacked" button
+7. **Select** the folder where you extracted the files
 
 ### Build from Source
 
