@@ -1,7 +1,7 @@
 // materials
 import LinearProgress from '@mui/material/LinearProgress'
 // vendors
-import { useEffect, useEffectEvent, useRef, useState } from 'react'
+import { Activity, useEffect, useEffectEvent, useRef, useState } from 'react'
 // utils
 import sendToBgScript from '@/utils/send-to-bg-script'
 
@@ -13,35 +13,31 @@ export default function LoadingIndicator({ tabId }: LoadingIndicatorProps) {
     const [isLoading, setIsLoading] = useState(false)
     const intervalId = useRef<NodeJS.Timeout | null>(null)
 
+    const pollLoadingStatus = () => {
+        if (!tabId) return
+
+        sendToBgScript('getTabLoadingStatus', { tabId }, response => {
+            setIsLoading(response.loading)
+
+            // Stop polling when loading finished
+            if (!response.loading && intervalId.current) {
+                clearInterval(intervalId.current)
+                intervalId.current = null
+            }
+        })
+    }
+
     const checkLoadingStatus = useEffectEvent(() => {
         if (!tabId) return
 
-        sendToBgScript(
-            'getTabLoadingStatus',
-            { tabId },
-            (response: { loading: boolean }) => {
-                setIsLoading(response.loading)
+        sendToBgScript('getTabLoadingStatus', { tabId }, response => {
+            setIsLoading(response.loading)
 
-                // If loading started, start polling
-                if (response.loading && !intervalId.current) {
-                    intervalId.current = setInterval(() => {
-                        sendToBgScript(
-                            'getTabLoadingStatus',
-                            { tabId },
-                            (res: { loading: boolean }) => {
-                                setIsLoading(res.loading)
-
-                                // Stop polling when loading finished
-                                if (!res.loading && intervalId.current) {
-                                    clearInterval(intervalId.current)
-                                    intervalId.current = null
-                                }
-                            },
-                        )
-                    }, 100)
-                }
-            },
-        )
+            // If loading started, start polling
+            if (response.loading && !intervalId.current) {
+                intervalId.current = setInterval(pollLoadingStatus, 100)
+            }
+        })
     })
 
     // Listen for navigation events
@@ -85,18 +81,18 @@ export default function LoadingIndicator({ tabId }: LoadingIndicatorProps) {
         }
     }, [tabId])
 
-    if (!isLoading) return null
-
     return (
-        <LinearProgress
-            sx={{
-                height: '2px',
-                left: 0,
-                position: 'fixed',
-                right: 0,
-                top: 0,
-                zIndex: 1,
-            }}
-        />
+        <Activity mode={isLoading ? 'visible' : 'hidden'}>
+            <LinearProgress
+                sx={{
+                    height: '2px',
+                    left: 0,
+                    position: 'fixed',
+                    right: 0,
+                    top: 0,
+                    zIndex: 1,
+                }}
+            />
+        </Activity>
     )
 }
